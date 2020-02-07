@@ -1,0 +1,5 @@
+// trying to assign value to type
+
+{
+    int = 2;
+}

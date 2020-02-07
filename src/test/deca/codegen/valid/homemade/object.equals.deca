@@ -1,0 +1,39 @@
+// Description:
+//    tests, given in the subject with the .ass output they're supposed to build
+//
+// Results:
+//      4 ; 4
+//
+// History:
+//    cree le 24/01/2020
+
+
+class P {
+}
+
+{
+    P p1 = new P();
+    P p2 = p1;
+    P p3 = new P();
+
+    if (p1.equals(p2)) {
+        println("oki doki");
+    } else {
+        println("not oki doki");
+    }
+
+    1+1;
+
+    if (p1.equals(p3)) {
+        println("not oki doki");
+    } else {
+        println("oki doki");
+    }
+
+    if (!p1.equals(p2)) {
+        println("not oki doki");
+    } else {
+        println("oki doki");
+    }
+    1 + 1;
+}

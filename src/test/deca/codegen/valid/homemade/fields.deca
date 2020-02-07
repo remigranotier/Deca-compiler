@@ -1,0 +1,29 @@
+// Description:
+//    tests, given in the subject with the .ass output they're supposed to build
+//
+// Results:
+//
+//
+// History:
+//    cree le 22/01/2020
+
+
+class C {
+    int x;
+    int y = 1;
+    /* int getX(){
+        return x;
+    }
+    void incrX(){
+        x = x + 1;
+    } */
+}
+
+
+{
+   C c = new C();
+   println(c.x); // expect 0
+   c.x = 2;
+   println(c.x); // expect 2
+
+}

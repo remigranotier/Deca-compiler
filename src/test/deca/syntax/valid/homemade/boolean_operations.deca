@@ -1,0 +1,38 @@
+// Description :
+//      Various boolean operations
+//
+// Results :
+//      true
+//      true
+//      true
+//      false
+//      true
+//      false
+//      false
+//      true
+//      false
+//
+// History :
+//      created on 9/01/2020
+
+{
+    println(true && true);
+
+    println(true || true);
+
+    println(5 < 6);
+
+    println(5 > 6);
+
+    println(5 <= 6);
+
+    println(5 >= 6);
+
+    println(5 == 4);
+    println(4 != 5);
+
+    //small test of many boolean at the same time
+    println(false && true || (4 > 5));
+    // && has a higher priority, this should return false (false || false)
+    // if the priority is not correct, this will return true instead
+}

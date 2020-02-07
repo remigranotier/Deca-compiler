@@ -1,0 +1,5 @@
+// trying to affect unknwon type to var
+
+{
+    coucou x;
+}

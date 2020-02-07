@@ -1,0 +1,12 @@
+// Description:
+//    verify printx (to print in hexadecimals)
+//
+// Results:
+//
+//
+// History:
+//    created 21/01/2020
+
+{
+   printx(4.0*16.0 + 2.0);
+}

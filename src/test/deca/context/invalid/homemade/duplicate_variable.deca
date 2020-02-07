@@ -1,0 +1,6 @@
+// trying to define a variable twice
+
+{
+    int x;
+    float x;
+}

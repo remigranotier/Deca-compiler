@@ -1,0 +1,6 @@
+// trying to declare class field twice
+
+class A {
+    int x;
+    int x;
+}

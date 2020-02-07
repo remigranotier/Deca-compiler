@@ -1,0 +1,94 @@
+; ADDSP : method table size : 6, nb of var 2
+	ADDSP #8
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+; Generation of the method table of : B
+	LEA 1(GB), R0
+	STORE R0, 5(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 6(GB)
+; Main program
+; Global variables initialization
+	NEW #3, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 7(GB)
+	NEW #3, R2
+	BOV heapFull
+	LEA 5(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 8(GB)
+; Beginning of main instructions:
+	LOAD 7(GB), R2
+	LOAD 1(R2), R1
+	WFLOAT
+	WSTR " ; "
+	LOAD 7(GB), R2
+	LOAD 2(R2), R1
+	WINT
+	WSTR " ; "
+	LOAD 8(GB), R2
+	LOAD 1(R2), R1
+	WINT
+	WSTR " ; "
+	LOAD 8(GB), R2
+	LOAD 2(R2), R2
+	LOAD 1(R2), R1
+	WFLOAT
+	WNL
+	HALT
+init.object:
+	RTS
+init.A:
+; save registers
+; initialization of own fields
+; Initialization of field x
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 1(R1)
+; Initialization of field y
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 2(R1)
+; restore registers
+	RTS
+init.B:
+; save registers
+; initialization of own fields
+; Initialization of field x
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 1(R1)
+; Initialization of field a
+	LOAD -2(LB), R1
+	LOAD #null, R0
+	STORE R0, 2(R1)
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,48 @@
+; ADDSP : method table size : 2, nb of var 0
+	ADDSP #2
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+	LOAD #5, R2
+	LOAD #21, R3
+	MUL #2, R3
+	QUO #7, R3
+	BOV divisionByZero
+	ADD R3, R2
+	ADD #1, R2
+	LOAD #1, R3
+	LOAD #1, R4
+	LOAD #1, R5
+	LOAD #1, R6
+	LOAD #1, R7
+	ADD #1, R7
+	ADD R7, R6
+	ADD R6, R5
+	ADD R5, R4
+	ADD R4, R3
+	MUL #1, R3
+	ADD R3, R2
+	LOAD R2, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WINT
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+divisionByZero:
+	WSTR "ERROR : Can't divide by 0 !"
+	WNL
+	ERROR
+; end main program

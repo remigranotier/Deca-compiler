@@ -1,0 +1,12 @@
+// Description:
+//    test error when modulo with Float as left operand
+//
+// Results:
+//     fail (ok)
+//
+// History:
+//    created 21/01/2020
+
+{
+   print(5.0%4);
+}

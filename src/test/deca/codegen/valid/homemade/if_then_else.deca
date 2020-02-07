@@ -1,0 +1,32 @@
+ // Description:
+ //    do a division
+ //
+ // Results:
+ //
+ //
+ // History:
+ //    created 14/01/2020
+
+ {
+    if (true) {
+        println("UwU");
+    } else {
+        println("OwO");
+    }
+
+    if (false) {
+        println("OwO");
+    } else if (false && true) {
+        println("OwO");
+    } else if (false) {
+        println("OwO");
+    } else {
+        println("UwU");
+    }
+
+    if (true || false || (true && 4 < 5)) {
+        println("UwU");
+    }
+
+    println("UwU");
+ }

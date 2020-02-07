@@ -1,0 +1,6 @@
+// trying to call unknown identifier
+
+{
+    int x = 4;
+    x = y;
+}

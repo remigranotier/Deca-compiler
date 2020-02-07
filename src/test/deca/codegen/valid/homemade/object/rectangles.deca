@@ -1,0 +1,107 @@
+// Description:
+//  inspired by a java test found on cs.utexas.edu, and the Rectangle java class
+//
+// Results:
+//
+//
+// History:
+//    cree le 27/01/2020
+
+
+class Rectangle {
+    // top left corner :
+    int x;
+    int y;
+
+    // size :
+    int width;
+    int height;
+
+    void set(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
+    void setSize(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
+
+
+
+}
+
+
+class TestClass {
+
+	void go()
+	{	Rectangle r1 = new Rectangle();
+
+	    r1.set(0, 0, 5, 5);
+		println("In method go. r1 : ");
+		println(r1.x);
+		println(r1.y);
+		println(r1.width);
+		println(r1.height);
+
+		r1.setSize(10, 15);
+		println("In method go. r1 : ");
+        println(r1.x);
+        println(r1.y);
+        println(r1.width);
+        println(r1.height);
+
+		alterPointee(r1);
+		println("In method go. r1 : ");
+		println(r1.x);
+		println(r1.y);
+		println(r1.width);
+		println(r1.height);
+
+		alterPointer(r1);
+		println("In method go. r1 : ");
+		println(r1.x);
+		println(r1.y);
+		println(r1.width);
+		println(r1.height);
+	}
+
+	void alterPointee(Rectangle r)
+	{	println("In method alterPointee. r : ");
+		println(r.x);
+		println(r.y);
+		println(r.width);
+		println(r.height);
+		r.setSize(20, 30);
+		println("In method alterPointee. r : ");
+        println(r.x);
+        println(r.y);
+        println(r.width);
+        println(r.height);
+	}
+
+	void alterPointer(Rectangle r)
+	{
+	    println("In method alterPointer. r ");
+        println(r.x);
+        println(r.y);
+        println(r.width);
+        println(r.height);
+		r.set(5, 10, 30, 35);
+        println("In method alterPointer. r ");
+        println(r.x);
+        println(r.y);
+        println(r.width);
+        println(r.height);
+	}
+}
+
+
+{
+    TestClass example = new TestClass();
+	example.go();
+}
+

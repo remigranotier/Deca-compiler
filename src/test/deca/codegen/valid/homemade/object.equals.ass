@@ -1,0 +1,117 @@
+; ADDSP : method table size : 4, nb of var 3
+	ADDSP #7
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : P
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+; Main program
+; Global variables initialization
+	NEW #1, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.P
+	POP R2
+	STORE R2, 5(GB)
+	LOAD 5(GB), R2
+	STORE R2, 6(GB)
+	NEW #1, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.P
+	POP R2
+	STORE R2, 7(GB)
+; Beginning of main instructions:
+; Beginning of a new If statement
+	LOAD 5(GB), R2
+; Beginning of a method call : method at index 0 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 6(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	SUBSP #2
+	CMP #0, R0
+	BEQ Else0
+	WSTR "oki doki"
+	WNL
+	BRA EndIf0
+Else0:
+	WSTR "not oki doki"
+	WNL
+EndIf0:
+	LOAD #1, R2
+	ADD #1, R2
+; Beginning of a new If statement
+	LOAD 5(GB), R2
+; Beginning of a method call : method at index 0 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 7(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	SUBSP #2
+	CMP #0, R0
+	BEQ Else1
+	WSTR "not oki doki"
+	WNL
+	BRA EndIf1
+Else1:
+	WSTR "oki doki"
+	WNL
+EndIf1:
+; Beginning of a new If statement
+	LOAD 5(GB), R2
+; Beginning of a method call : method at index 0 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 6(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	SUBSP #2
+	CMP #0, R0
+	BNE Else2
+	WSTR "not oki doki"
+	WNL
+	BRA EndIf2
+Else2:
+	WSTR "oki doki"
+	WNL
+EndIf2:
+	LOAD #1, R2
+	ADD #1, R2
+	HALT
+init.object:
+	RTS
+init.P:
+; save registers
+; initialization of own fields
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,41 @@
+// Description:
+//    tests, given in the subject with the .ass output they're supposed to build
+//
+// Results:
+//
+//
+// History:
+//    cree le 24/01/2020
+
+
+class A {
+    int x = 1;
+
+    int val() {
+        return x;
+    }
+}
+
+class B extends A {
+    int x = 2;
+    int y = 1;
+
+    int val() {
+        return x;
+    }
+
+    int valY() {
+        return y;
+    }
+
+}
+
+
+
+{
+    A b = new B();
+    A a = new A();
+
+    println(((B) (b)).valY());
+    println(((B) (a)).valY());
+}

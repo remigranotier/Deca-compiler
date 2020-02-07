@@ -1,0 +1,26 @@
+// Description:
+//    Testing a simple method in a class, that does not have parameters nor a "return"
+//
+// Results:
+//
+//
+// History:
+//    cree le 24/01/2020
+
+
+class Point {
+    int x;
+    int y;
+    void move(){
+        x = x + 1;
+        y = y + 1;
+    }
+}
+
+{
+   /* Point p = new Point();
+    p.move();
+    println(p.x);
+    println(p.y); */
+}
+

@@ -1,0 +1,102 @@
+; ADDSP : method table size : 2, nb of var 0
+	ADDSP #2
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+; Beginning of a new If statement
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+	WSTR "UwU"
+	WNL
+	BRA EndIf0
+Else0:
+	WSTR "OwO"
+	WNL
+EndIf0:
+; Beginning of a new If statement
+; Beginning of a Boolean Literal control flow : value : false ; b = false
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA Else1
+; End of a Boolean Literal control flow
+; End of a Boolean Literal control flow
+	WSTR "OwO"
+	WNL
+	BRA EndIf1
+Else1:
+; Beginning of a 'and' Control Flow : b = false E = Else2
+; Beginning of the left op control flow
+; Beginning of a Boolean Literal control flow : value : false ; b = false
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA Else2
+; End of a Boolean Literal control flow
+; End of a Boolean Literal control flow
+; Beginning of the right op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; End of a 'and' Control Flow : b = false E = Else2
+	WSTR "OwO"
+	WNL
+	BRA EndIf1
+Else2:
+; Beginning of a Boolean Literal control flow : value : false ; b = false
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA Else3
+; End of a Boolean Literal control flow
+; End of a Boolean Literal control flow
+	WSTR "OwO"
+	WNL
+	BRA EndIf1
+Else3:
+	WSTR "UwU"
+	WNL
+EndIf1:
+; Beginning of a new If statement
+; Beginning of a 'and' Control Flow : b = true E = Else4
+; Beginning of the left op control flow
+; Beginning of a 'and' Control Flow : b = false E = EndOfBoolExpr0
+; Beginning of the left op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA EndOfBoolExpr0
+; End of a Boolean Literal control flow
+; Beginning of the right op control flow
+; Beginning of a Boolean Literal control flow : value : false ; b = true
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; End of a Boolean Literal control flow
+; End of a 'and' Control Flow : b = false E = EndOfBoolExpr0
+; Beginning of the right op control flow
+; Beginning of a 'and' Control Flow : b = false E = Else4
+; Beginning of the left op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; Beginning of the right op control flow
+; Beginning of a comparison in a control flow
+	LOAD #5, R2
+	CMP #4, R2
+	BLE Else4
+; End of a 'and' Control Flow : b = false E = Else4
+EndOfBoolExpr0:
+; End of a 'and' Control Flow : b = true E = Else4
+	WSTR "UwU"
+	WNL
+	BRA EndIf2
+Else4:
+EndIf2:
+	WSTR "UwU"
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+; end main program

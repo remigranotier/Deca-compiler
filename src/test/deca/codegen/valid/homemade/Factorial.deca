@@ -1,0 +1,17 @@
+class Calc {
+
+    int factorial(int n) {
+        if (n == 1) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
+    }
+}
+
+{
+    Calc oui = new Calc();
+
+    println(oui.factorial(4));
+    println(oui.factorial(30));
+}

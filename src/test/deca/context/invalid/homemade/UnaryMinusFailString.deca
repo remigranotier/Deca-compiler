@@ -1,0 +1,12 @@
+// Description:
+//    try a unary minus on a string
+//
+// Results:
+//     fail (ok)
+//
+// History:
+//    created 21/01/2020
+
+{
+   println(-"bleh.");
+}

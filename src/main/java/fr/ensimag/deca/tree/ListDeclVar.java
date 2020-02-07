@@ -1,0 +1,72 @@
+package fr.ensimag.deca.tree;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
+import org.apache.log4j.Logger;
+
+/**
+ * List of declarations (e.g. int x; float y,z).
+ * 
+ * @author gl01
+ * @date 01/01/2020
+ */
+public class ListDeclVar extends TreeList<AbstractDeclVar> {
+    private static final Logger LOG = Logger.getLogger(ListDeclVar.class);
+    @Override
+    public void decompile(IndentPrintStream s) {
+        for (AbstractDeclVar declVar : getList()) {
+            declVar.decompile(s);
+        }
+    }
+
+    /**
+     * Implements non-terminal "list_decl_var" of [SyntaxeContextuelle] in pass 3
+     * @param compiler contains the "env_types" attribute
+     * @param localEnv 
+     *   its "parentEnvironment" corresponds to "env_exp_sup" attribute
+     *   in precondition, its "current" dictionary corresponds to 
+     *      the "env_exp" attribute
+     *   in postcondition, its "current" dictionary corresponds to 
+     *      the "env_exp_r" attribute
+     * @param currentClass 
+     *          corresponds to "class" attribute (null in the main bloc).
+     */    
+    void verifyListDeclVariable(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+        LOG.trace("verify ListDeclVar: start");
+        for (AbstractDeclVar declaration : this.getList()) {
+            declaration.verifyDeclVar(compiler, localEnv, currentClass);
+        }
+        LOG.trace("verify ListDeclVar: end");
+    }
+
+    /**
+     * Generates the code for the initialization of each of the variables.
+     * @param compiler
+     */
+    void codeGenListDeclVar(DecacCompiler compiler) {
+        int index = compiler.getGBOffset();
+        for (AbstractDeclVar decl : getList()) {
+            decl.codeGenDeclVar(compiler, index, Register.GB);
+            index++;
+        }
+        compiler.setNbVar(getList().size());
+    }
+
+    /**
+     * Generates the code for the initialization of local variables in a method.
+     * @param compiler
+     */
+    public void codeGenListDeclVarMethod(DecacCompiler compiler) {
+        int index = 1;
+        for (AbstractDeclVar decl : getList()) {
+            decl.codeGenDeclVar(compiler, index, Register.LB);
+            index++;
+        }
+        compiler.setNbVar(getList().size());
+    }
+}

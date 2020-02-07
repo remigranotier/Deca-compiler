@@ -1,0 +1,225 @@
+; ADDSP : method table size : 4, nb of var 4
+	ADDSP #8
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.A.equals, R0
+	STORE R0, 4(GB)
+; Main program
+; Global variables initialization
+	NEW #2, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 5(GB)
+	NEW #2, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 6(GB)
+	NEW #2, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 7(GB)
+	NEW #1, R2
+	BOV heapFull
+	LEA 1(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Object
+	POP R2
+	STORE R2, 8(GB)
+; Beginning of main instructions:
+	LOAD #1, R2
+	LOAD 5(GB), R3
+	STORE R2, 1(R3)
+	LOAD #1, R2
+	LOAD 6(GB), R3
+	STORE R2, 1(R3)
+	LOAD #3, R2
+	LOAD 7(GB), R3
+	STORE R2, 1(R3)
+; Beginning of a new If statement
+	LOAD 5(GB), R2
+; Beginning of a method call : method at index 0 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 6(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	SUBSP #2
+	CMP #0, R0
+	BEQ Else0
+	WSTR "ok"
+	WNL
+	BRA EndIf0
+Else0:
+	WSTR "o no"
+	WNL
+EndIf0:
+; Beginning of a new If statement
+	LOAD 5(GB), R2
+; Beginning of a method call : method at index 0 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 7(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	SUBSP #2
+	CMP #0, R0
+	BEQ Else1
+	WSTR "o no"
+	WNL
+	BRA EndIf1
+Else1:
+	WSTR "ok"
+	WNL
+EndIf1:
+; Beginning of a new If statement
+	LOAD 6(GB), R2
+; Beginning of a method call : method at index 0 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 5(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	SUBSP #2
+	CMP #0, R0
+	BEQ Else2
+	WSTR "ok"
+	WNL
+	BRA EndIf2
+Else2:
+	WSTR "o no"
+	WNL
+EndIf2:
+; Beginning of a new If statement
+	LOAD 5(GB), R2
+; Beginning of a method call : method at index 0 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 8(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 1(R2)
+	SUBSP #2
+	CMP #0, R0
+	BEQ Else3
+	WSTR "o no"
+	WNL
+	BRA EndIf3
+Else3:
+	WSTR "ok"
+	WNL
+EndIf3:
+	HALT
+init.object:
+	RTS
+init.A:
+; save registers
+; initialization of own fields
+; Initialization of field x
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 1(R1)
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.A.equals:
+; save registers
+	PUSH R3
+	PUSH R2
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD -3(LB), R2
+	LEA 3(GB), R0
+ControlFlowBlock0:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr0
+	CMP #null, R2
+	BEQ Else4
+	BRA ControlFlowBlock0
+EndOfBoolExpr0:
+; End of an instanceof
+; Beginning of the computation of a boolean expression
+; Beginning of a comparison in a control flow
+	LOAD -2(LB), R2
+	LOAD 1(R2), R2
+; Start of an instanceof
+	LOAD -3(LB), R3
+	PUSH R3
+	LEA 3(GB), R0
+ControlFlowBlock2:
+	LOAD 0(R3), R3
+	CMP R0, R3
+	BEQ CastSuccess0
+	CMP #null, R3
+	BNE ControlFlowBlock2
+; End of an instanceof
+	WSTR "ERROR : cannot cast Object type object to A"
+	WNL
+	ERROR
+CastSuccess0:
+	POP R3
+; Expression of type Object casted to type A
+	LOAD 1(R3), R3
+	CMP R3, R2
+	BEQ ControlFlowBlock1
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr1
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock1:
+	LOAD #1, R2
+EndOfBoolExpr1:
+; End of the computation of a boolean expression
+	LOAD R2, R0
+	BRA fin.A.equals
+	BRA EndIf4
+Else4:
+	LOAD #0, R2
+	LOAD R2, R0
+	BRA fin.A.equals
+EndIf4:
+	WSTR "ERROR : exited method A.equals with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.A.equals:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

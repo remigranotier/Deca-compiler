@@ -1,0 +1,17 @@
+// Description :
+//      main block declaring a variable AFTER an instruction is done.
+//
+// Results :
+//      parser error
+//
+// History :
+//      created on 11/01/2020
+
+{
+    int y = 5;
+    print("weeeeeeeeeeeeeeee", y);
+
+    int x = 3;
+
+}
+

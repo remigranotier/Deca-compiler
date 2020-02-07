@@ -1,0 +1,4 @@
+#!/bin/sh
+cd "$(dirname "$0")"/../../../src/test/deca/context/invalid/homemade || exit 1
+decac -p -P affect_float_to_int.deca andOnFloat.deca arith_op_not_number.deca assign_class.deca assign_method.deca assign_type.deca assign_wrong_type.deca bad_method_redefinition_sig.deca bad_method_redefinition_type.deca call_notmethod.deca call_method_on_notclass.deca comp_dif_types.deca duplicate_classes.deca declclass_wrongorder.deca duplicate_field.deca duplicate_method.deca duplicate_parameter.deca duplicate_variable.deca if_sans_condbool.deca indefined_variable.deca modulo_non_entiers.deca initializat_diff_types.deca moduloWithBool.deca moduloWithFloatLeft.deca >/dev/null
+echo "Test Parallelisme : OK"

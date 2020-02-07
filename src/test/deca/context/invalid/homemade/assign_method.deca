@@ -1,0 +1,10 @@
+// trying to assign value to method
+
+class A {
+    int x() { return 4; }
+}
+
+{
+    A a = new A();
+    a.x = 2;
+}

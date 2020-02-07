@@ -1,0 +1,13 @@
+// Description:
+//    print a conversion of int to float
+//
+// Results:
+//  ok
+//
+// History:
+//    created 21/01/2020
+
+{
+   println(5.0 + 5); //expect 10.0
+   println(5 + 5.0); // expect 10.0
+}

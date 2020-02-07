@@ -1,0 +1,21 @@
+// Description :
+//      Various boolean operations
+//
+// Results :
+//      left-hand side of assignment is not an lvalue
+//
+// History :
+//      created on 9/01/2020
+
+{
+    //booleans println are illegal, but the parser doesn't know that so shhhhhhhh
+    println(true || True); //True will be an identifier : it does not crash the parser
+    println(5 < "certes"); //Contextual error
+    println(5 <= 6 <= 9);
+    println(5 = 4); //this should make the parser angry as 5 is not a valid lvalue
+    println(4 != 5);
+
+    //small test of many boolean at the same time
+    // && has a higher priority, this should return false (false || false)
+    // if the priority is not correct, this will return true instead
+}

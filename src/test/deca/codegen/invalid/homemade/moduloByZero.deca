@@ -1,0 +1,12 @@
+// Description:
+//    test error when modulo by zero
+//
+// Results:
+//     fail (ok)
+//
+// History:
+//    created 16/01/2020
+
+{
+   print(1%0);
+}

@@ -1,0 +1,12 @@
+// Description :
+//test of modulo operation with non int variables
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <10> : <Modulo operands must be int and are float and float>
+{
+   float a = 2;
+   float b = 7;
+   b = b%a;
+
+}

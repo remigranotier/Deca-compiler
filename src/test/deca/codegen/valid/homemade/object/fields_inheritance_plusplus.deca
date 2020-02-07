@@ -1,0 +1,51 @@
+// Description:
+//    classes with fields only, much inheritance
+//
+// Results:
+//
+//
+// History:
+//    cree le 24/01/2020
+
+
+class A {
+    int x = 1;
+    int y = 2;
+}
+
+class B extends A {
+}
+
+
+class C extends A {
+    int x;
+    int y = 1;
+
+}
+
+class D extends C {
+    int x = 1;
+    int z;
+
+}
+
+
+
+{
+   B b = new B();
+  /*  C c = new C();
+   D d = new D();
+
+
+
+   println(c.x); // expect 0
+   println(c.y); // expect 1
+
+   println(d.x); // expect 1
+   println(d.y); // expect 1
+   println(d.z); // expect 0
+*/
+    println(b.x); // expect 1
+    println(b.y); // expect 2
+
+}

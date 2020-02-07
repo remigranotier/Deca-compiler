@@ -1,0 +1,5 @@
+// trying to return on void method
+
+class A {
+    void x() {return 2;}
+}

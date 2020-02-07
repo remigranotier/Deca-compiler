@@ -1,0 +1,12 @@
+// Description:
+//    reads a float and prints it back without assignment.
+//
+// Results:
+//  ok
+//
+// History:
+//    created 21/01/2020
+
+{
+  println(readFloat());
+}

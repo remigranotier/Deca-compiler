@@ -1,0 +1,11 @@
+// Description :
+//test of print of a boolean variable
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : <Cannot print expression of type boolean>
+{
+   boolean a = true;
+   println(a);
+
+}

@@ -1,0 +1,62 @@
+// Description:
+//    tests, given in the subject with the .ass output they're supposed to build
+//
+// Results:
+//
+//
+// History:
+//    cree le 24/01/2020
+
+
+class A {
+    int x = 1;
+
+    int val() {
+        return x;
+    }
+}
+
+class B extends A {
+    int x = 2;
+    int y = 1;
+
+    int val() {
+        return x;
+    }
+
+    int valY() {
+        return y;
+    }
+
+}
+
+class C {
+    int x;
+
+    int val() {
+        return x;
+    }
+}
+
+{
+    A a = new A();
+    A b = new B();
+    B b2;
+    C c = new C();
+
+    float n1 = 3.425;
+    int n2 = 5;
+
+    a = (A) (a);
+    println(a.val()); //expect 1
+
+    println(b.val()); //expect 2
+    b2 = (B) (b);
+    println("cast ok");
+    println(b2.val()); //expect 2
+    println(b2.valY()); //expect 1
+    println((int) (n1));
+    println((float) (n2));
+
+    1 + 1;
+}

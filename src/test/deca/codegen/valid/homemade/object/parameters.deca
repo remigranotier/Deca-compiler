@@ -1,0 +1,46 @@
+// Description:
+//  inspired by a java test found on cs.utexas.edu, tests parameters' behavior
+//
+// Results:
+//
+//
+// History:
+//    cree le 27/01/2020
+
+
+
+class ClasseTest {
+
+    void go()
+    {	int x = 3;
+        int y = 2;
+        println("In method go. x: ");
+        println(x);
+        falseSwap(x,y);
+        println("in method go. x: ");
+//        moreParameters(x,y);
+        println("in method go. x: ");
+    }
+
+    void falseSwap(int x, int y)
+    {   int temp = x;
+        println("in method falseSwap. x: ");
+        x = y;
+        y = temp;
+        println("in method falseSwap. x: ");
+    }
+/*
+    void moreParameters(int a, int b)
+    {	println("in method moreParameters. a: ");
+        a = a * b;
+        b = 12;
+        println("in method moreParameters. a: ");
+        //falseSwap(b,a);
+        println("in method moreParameters. a: ");
+    } */
+}
+
+{
+    ClasseTest test = new ClasseTest();
+    test.go();
+}

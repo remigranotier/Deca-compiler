@@ -1,0 +1,174 @@
+; ADDSP : method table size : 4, nb of var 1
+	ADDSP #5
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : C
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+; Main program
+; Global variables initialization
+	NEW #11, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.C
+	POP R2
+	STORE R2, 5(GB)
+; Beginning of main instructions:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 5(GB), R2
+	LOAD 1(R2), R2
+	CMP #0, R2
+	BNE Else0
+	WSTR "ok1"
+	WNL
+	BRA EndIf0
+Else0:
+EndIf0:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 5(GB), R2
+	LOAD 2(R2), R2
+	CMP #1, R2
+	BNE Else1
+	WSTR "ok2"
+	WNL
+	BRA EndIf1
+Else1:
+EndIf1:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 5(GB), R2
+	LOAD 3(R2), R2
+	CMP #0x0.0p0, R2
+	BNE Else2
+	WSTR "ok3"
+	WNL
+	BRA EndIf2
+Else2:
+EndIf2:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 5(GB), R2
+	LOAD 4(R2), R2
+	CMP #0x1.0p0, R2
+	BNE Else3
+	WSTR "ok4"
+	WNL
+	BRA EndIf3
+Else3:
+EndIf3:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 5(GB), R2
+	LOAD 8(R2), R2
+	CMP #7, R2
+	BNE Else4
+	WSTR "ok7 entier expression"
+	WNL
+	BRA EndIf4
+Else4:
+EndIf4:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 5(GB), R2
+	LOAD 10(R2), R2
+	CMP #0x1.0p1, R2
+	BNE Else5
+	WSTR "ok9 floats expression"
+	WNL
+	BRA EndIf5
+Else5:
+EndIf5:
+	HALT
+init.object:
+	RTS
+init.C:
+; save registers
+	PUSH R2
+; initialization of own fields
+; Initialization of field x
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 1(R1)
+; Initialization of field y
+	LOAD -2(LB), R1
+	LOAD #1, R0
+	STORE R0, 2(R1)
+; Initialization of field a1
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 3(R1)
+; Initialization of field a2
+	LOAD -2(LB), R1
+	LOAD #0x1.0p0, R0
+	STORE R0, 4(R1)
+; Initialization of field b1
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 5(R1)
+; Initialization of field b2
+	LOAD -2(LB), R1
+	LOAD #1, R0
+	STORE R0, 6(R1)
+; Initialization of field o
+	LOAD -2(LB), R1
+	LOAD #null, R0
+	STORE R0, 7(R1)
+; Initialization of field expr
+	LOAD -2(LB), R1
+	LOAD #3, R2
+	ADD #4, R2
+	LOAD R2, R0
+	STORE R0, 8(R1)
+; Initialization of field booleanExpr
+	LOAD -2(LB), R1
+; Beginning of the computation of a boolean expression
+; Beginning of a 'and' Control Flow : b = true E = ControlFlowBlock0
+; Beginning of the left op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; Beginning of the right op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA ControlFlowBlock0
+; End of a Boolean Literal control flow
+EndOfBoolExpr1:
+; End of a 'and' Control Flow : b = true E = ControlFlowBlock0
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr0
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock0:
+	LOAD #1, R2
+EndOfBoolExpr0:
+; End of the computation of a boolean expression
+	LOAD R2, R0
+	STORE R0, 9(R1)
+; Initialization of field exprFloat
+	LOAD -2(LB), R1
+	LOAD #0x1.0p0, R2
+	ADD #0x1.0p0, R2
+	LOAD R2, R0
+	STORE R0, 10(R1)
+; restore registers
+	POP R2
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,6 @@
+// trying to call method on something which is not a class
+
+{
+    int x;
+    x.y();
+}

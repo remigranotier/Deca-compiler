@@ -1,0 +1,91 @@
+; ADDSP : method table size : 11, nb of var 2
+	ADDSP #13
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD Code.A.a, R0
+	STORE R0, 5(GB)
+	LOAD Code.A.b, R0
+	STORE R0, 6(GB)
+; Generation of the method table of : B
+	LEA 3(GB), R0
+	STORE R0, 7(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 8(GB)
+	LOAD Code.A.a, R0
+	STORE R0, 9(GB)
+	LOAD Code.B.b, R0
+	STORE R0, 10(GB)
+	LOAD Code.B.c, R0
+	STORE R0, 11(GB)
+; Main program
+; Global variables initialization
+	LOAD #3, R2
+	STORE R2, 13(GB)
+; Beginning of main instructions:
+	LOAD 13(GB), R1
+	WINT
+	LOAD #1, R2
+	ADD #1, R2
+	HALT
+init.object:
+	RTS
+init.A:
+; save registers
+; initialization of own fields
+; restore registers
+	RTS
+init.B:
+; save registers
+	LOAD -2(LB), R1
+; Call for initialization of inherited fields
+	PUSH R1
+	BSR init.A
+	SUBSP #1	; We get the stack back to its initial state
+; finished dealing with inheritance
+; initialization of own fields
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.A.a:
+; save registers
+	WSTR "ok"
+	WNL
+fin.A.a:
+; restore registers
+	RTS
+code.A.b:
+; save registers
+	WSTR "not ok"
+	WNL
+fin.A.b:
+; restore registers
+	RTS
+code.B.b:
+; save registers
+	WSTR "ok"
+	WNL
+fin.B.b:
+; restore registers
+	RTS
+code.B.c:
+; save registers
+	WSTR "ok"
+	WNL
+fin.B.c:
+; restore registers
+	RTS
+; end main program

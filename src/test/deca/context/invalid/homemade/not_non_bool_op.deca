@@ -1,0 +1,11 @@
+// Description :
+//test of not operation with non boolean operand
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : <Not operand must be boolean but is float>
+{
+   float a = 2;
+   a = !a;
+
+}

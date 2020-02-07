@@ -1,0 +1,17 @@
+// Description :
+//test of simple function with while
+//
+// Results :
+//ok
+{
+   int a = 7;
+   int b=3;
+
+   // Doit etre refuse.
+   while(a>1){
+    if (b>a){
+        println("passe le 2");
+    }
+    a=a-1;
+   }
+}

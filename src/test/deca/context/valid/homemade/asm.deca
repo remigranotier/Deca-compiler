@@ -1,0 +1,5 @@
+// usage of asm
+
+class A {
+    int b() asm("SUB R0, R1");
+}

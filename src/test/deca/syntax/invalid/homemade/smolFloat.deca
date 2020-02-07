@@ -1,0 +1,14 @@
+// Description:
+//    Test de génération d'une erreur si overflow d'une opération arithmétique sur des Floats
+//
+// Resultats:
+//
+//
+// Historique:
+//    cree le 17/01/2020
+
+
+{
+      println(0.0);
+      println(1.0e-999);
+}

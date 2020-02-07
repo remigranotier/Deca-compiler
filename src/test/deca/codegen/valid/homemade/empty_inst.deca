@@ -1,0 +1,15 @@
+// Description:
+ //    empty instruction
+ //
+ // Results:
+ //     4
+ //
+ // History:
+ //    created 17/01/2020
+
+{
+    int x = 4;
+    ;
+    println(x);
+}
+

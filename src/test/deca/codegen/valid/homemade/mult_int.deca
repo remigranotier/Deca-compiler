@@ -1,0 +1,12 @@
+// Description:
+//      print a multiplication
+//
+// Results:
+//
+//
+// History:
+//    created 14/01/2020
+
+{
+   println(3*4);
+}

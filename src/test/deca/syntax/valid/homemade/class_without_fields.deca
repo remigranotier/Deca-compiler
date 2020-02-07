@@ -1,0 +1,21 @@
+// Description :
+//      Various boolean operations
+//
+// Results :
+//
+// History :
+//      created on 9/01/2020
+
+class ouaip extends ouaipp{
+    void gigaOuaip() {
+        print(ouais);
+    }
+
+    int wesh(int weshalors) {
+        return weshalors + 1 ;
+    }
+}
+
+{
+    println("nice");
+}

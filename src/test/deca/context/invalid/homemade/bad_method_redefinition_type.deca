@@ -1,0 +1,9 @@
+// trying to wrongly redefine method
+
+class A {
+    int x(float y) { return 3; }
+}
+
+class B extends A {
+    float x(float y) { return y; }
+}

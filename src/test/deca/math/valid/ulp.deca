@@ -1,0 +1,11 @@
+#include "Math.decah"
+
+{
+Math m = new Math();
+println("ulp(1) = ", m.ulp(1.0));
+println("ulp(2) = ", m.ulp(2.0));
+println("ulp(4) = ", m.ulp(4.0));
+println("ulp(1 000 000) = ", m.ulp(1000000.0));
+println("ulp(2**-23) = ", m.ulp(m._pow(2.0,-23)));
+println("ulp(1.5) = ", m.ulp(1.5));
+}

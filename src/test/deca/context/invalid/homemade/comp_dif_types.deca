@@ -1,0 +1,15 @@
+// Description :
+//test of exact comparison between different types
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <12> : <(In)equality operands must be int or float or both booleans and are int and boolean(3.3)>
+{
+   int a = 1;
+   boolean b = true;
+
+   // Doit etre refuse.
+    if(a==b){
+        a=2;
+    }
+}

@@ -1,0 +1,12 @@
+// Description:
+//    Do a plus on float to check if the airthOverflow error is dealt with properly in the .ass
+//
+// Results:
+//
+//
+// History:
+//    created 24/01/2020
+
+{
+    println(4.58 + 5.42);
+}

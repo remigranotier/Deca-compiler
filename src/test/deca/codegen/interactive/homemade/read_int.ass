@@ -1,0 +1,38 @@
+	TSTO #3	; Max nb of stored register : 0 , ADDSP : 3
+	BOV stackOverflow
+; ADDSP : method table size : 2, nb of var 1
+	ADDSP #3
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+	RINT
+	BOV readIntWrongType
+	LOAD R1, R2
+	STORE R2, 3(GB)
+; Beginning of main instructions:
+	LOAD 3(GB), R1
+	WINT
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+readIntWrongType:
+	WSTR "ERROR : You have given a Float instead of an Integer, or there has been an overflow."
+	WNL
+	ERROR
+stackOverflow:
+	WSTR "ERROR : stack overflow"
+	WNL
+	ERROR
+; end main program

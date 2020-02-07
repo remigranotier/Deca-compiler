@@ -1,0 +1,25 @@
+// Description:
+//    tests, given in the subject with the .ass output they're supposed to build
+//
+// Results:
+//
+//
+// History:
+//    cree le 24/01/2020
+
+
+class P {
+    int x;
+    int move(int a){
+        x = x + a;
+    }
+}
+
+{
+    P p = new P();
+
+    p.move(3);
+    println(p.x);
+
+    1 + 1;
+}

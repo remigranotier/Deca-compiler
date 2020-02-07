@@ -1,0 +1,7 @@
+// Trying to create the same class twice
+
+class A {
+}
+
+class A {
+}

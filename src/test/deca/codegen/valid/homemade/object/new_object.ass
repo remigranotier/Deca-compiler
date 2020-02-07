@@ -1,0 +1,39 @@
+	TSTO #7	; Max nb of stored register : 4 , ADDSP : 3
+	BOV stackOverflow
+; ADDSP : method table size : 2, nb of var 1
+	ADDSP #3
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+	NEW #1, R2
+	BOV heapFull
+	LEA 1(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Object
+	POP R2
+	STORE R2, 3(GB)
+; Beginning of main instructions:
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+stackOverflow:
+	WSTR "ERROR : stack overflow"
+	WNL
+	ERROR
+; end main program

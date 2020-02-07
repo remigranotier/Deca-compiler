@@ -1,0 +1,140 @@
+// Grenoble INP - Ensimag projet GL -*- mode: java -*-
+// Library for class Math of Deca, coded in Deca
+
+class Math {
+    float _pi = 3.1415926535;
+
+    float _abs(float entry){
+        if (entry < 0.0) {
+            return(-1.0 * entry);
+        }
+        return (entry + 0.0);
+    }
+
+    float _pow(float n, int k){
+        // return n^k
+        if (k == 0){ return(1.0); }
+        if (k < 0){ return(1 / _pow(n, -k)); }
+        if (k == 1) {return(n); }
+        if (k == (k/2 + k/2)){
+            return (_pow(n * n, k / 2));
+        }
+        return (_pow(n * n, (k - 1) / 2) * n);
+    }
+
+    int _fact(int k){
+        if (k <= 0) {return 1;}
+        return (_fact(k - 1) * k);
+    }
+
+    float _modulo2pi(float entry){
+        float k;
+        float res = entry + 0.0;
+        if (res > 0.0){
+            while (res >= _pi) {
+                k = _pi * 2.0;
+                while (res > k * 2.0) {
+                    k = k * 2.0;
+                }
+                res = res - k;
+            }
+        }
+        if (res < 0.0){
+            while (res < -_pi) {
+                k = -_pi * 2.0;
+                while (res < k * 2.0) {
+                    k = k * 2.0;
+                }
+                res = res - k;
+            }
+        }
+        return (res);
+    }
+
+    float ulp(float entri){
+        float aprox = entri;
+        float x = 1.0/4.0;  //-2
+        x = x*x;            //-4
+        x = x*x;            //-8
+        x = x*x;            //-16
+        x = x*x;            //-32
+        x = x*x*2;          //-63
+        x = x*x/2;          //-127
+        aprox = entri + x;
+        while (aprox == entri){
+            x = x * 2;
+            aprox = entri + x;
+        }
+        return (x);
+    }
+
+    float sin(float entry){
+        float norma = _modulo2pi(entry);
+        int k = 13;
+        float res = 1 / ((float) (_fact(k)));
+        float addpow = norma * norma;
+        int signe = 1;
+        while (k >= 2){
+            signe = -signe;
+            k = k - 2;
+            res = res * addpow + signe / ((float) (_fact(k)));
+        }
+        return (res * norma);
+    }
+
+    float cos(float entry){
+        float norma = _modulo2pi(entry);
+        int k = 20;
+        float res = 1 / ((float) (_fact(k)));
+        float addpow = norma * norma;
+        int signe = 1;
+        while (k > 0){
+            signe = -signe;
+            k = k - 2;
+            res = res * addpow + signe / ((float) (_fact(k)));
+        }
+        return (res);
+    }
+
+    float asin(float entry){
+        int k = 3;
+        float coef = 0.5;
+        float addpow = entry * entry;
+        float pow = addpow * entry;
+        float res = entry + coef * pow / 3;
+        if ((entry > 1.0) || (entry < -1.0)) {
+            println ("error, must be between -1 and 1");
+            return(0.0);
+        }
+        while (k < 999){
+            pow = pow * addpow;
+            coef = coef * k / (k + 1);
+            k = k + 2;
+            res = res + coef * pow / k;
+            }
+        return (res);
+    }
+
+    float atan(float entry){
+        if ((entry > 1.0) || (entry < -1.0)) {
+            return (_pi/2 - (_atan(1/entry)));
+        }
+        return (_atan(entry));
+    }
+
+    float _atan(float entry){
+        int k = 999;
+        float res = - 1 / ((float) (k));
+        float addpow = entry * entry;
+        int signe = -1;
+        while (k > 2){
+            k = k - 2;
+            signe = -signe;
+            res = res * addpow + signe / ((float) (k));
+        }
+        return (res * entry);
+    }
+}
+
+
+// End of Deca Math library

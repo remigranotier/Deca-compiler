@@ -1,0 +1,12 @@
+// Description :
+//test of boolean operation between not boolean operands
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : <Boolean operators operands must be boolean but are boolean and int>
+{
+
+   boolean b=true&&1;
+   // Doit etre refuse.
+
+}

@@ -1,0 +1,68 @@
+// Description :
+//    basic test of a class without instruction "new"
+//
+// Results:
+//
+//
+// History:
+//    cree le 22/01/2020
+
+
+class C {
+    int x;
+    int y = 1;
+    float a1;
+    float a2 = 1.0;
+    boolean b1;
+    boolean b2 = true;
+    Object o;
+
+    int expr = 3 + 4;
+    boolean booleanExpr = true && true;
+    float exprFloat = 1.0 + 1.0;
+
+    }
+
+{
+    C c = new C();
+
+    if (c.x == 0) {
+        println("ok1");
+    }
+
+
+    if (c.y == 1) {
+        println("ok2");
+     }
+
+    if (c.a1 == 0.0) {
+        println("ok3");
+     }
+
+    if (c.a2 == 1.0) {
+        println("ok4");
+    }
+
+/*
+    if (!c.b1) {
+        println("ok5 booléen non explicite");
+    }
+    if (c.b2) {
+        println("ok6 booléen explicite");
+    }
+*/
+
+    if (c.expr == 7){
+        println("ok7 entier expression");
+     }
+
+/*
+    if (c.booleanExpr){
+          println("ok8 booléen expression");
+    }
+*/
+    if (c.exprFloat == 2.0){
+        println("ok9 floats expression");
+    }
+
+}

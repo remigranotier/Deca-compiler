@@ -1,0 +1,105 @@
+; ADDSP : method table size : 2, nb of var 2
+	ADDSP #4
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+	LOAD #1, R2
+	STORE R2, 3(GB)
+	LOAD #0, R2
+	STORE R2, 4(GB)
+; Beginning of main instructions:
+; Beginning of a new If statement
+; Beginning of a 'and' Control Flow : b = false E = Else0
+; Beginning of the left op control flow
+; Beginning of a 'and' Control Flow : b = false E = Else0
+; Beginning of the left op control flow
+	LOAD 3(GB), R0
+	CMP #0, R0
+	BNE Else0
+; Beginning of the right op control flow
+	LOAD 4(GB), R0
+	CMP #0, R0
+	BNE Else0
+; End of a 'and' Control Flow : b = false E = Else0
+; Beginning of the right op control flow
+; Beginning of a 'and' Control Flow : b = true E = Else0
+; Beginning of the left op control flow
+	LOAD 3(GB), R0
+	CMP #0, R0
+	BEQ EndOfBoolExpr0
+; Beginning of the right op control flow
+	LOAD 4(GB), R0
+	CMP #0, R0
+	BNE Else0
+EndOfBoolExpr0:
+; End of a 'and' Control Flow : b = true E = Else0
+; End of a 'and' Control Flow : b = false E = Else0
+	WSTR "Error"
+	WNL
+	BRA EndIf0
+Else0:
+; Beginning of a 'and' Control Flow : b = false E = Else1
+; Beginning of the left op control flow
+; Beginning of a 'and' Control Flow : b = false E = Else1
+; Beginning of the left op control flow
+	LOAD 3(GB), R0
+	CMP #0, R0
+	BEQ Else1
+; Beginning of the right op control flow
+	LOAD 3(GB), R0
+	CMP #0, R0
+	BEQ Else1
+; End of a 'and' Control Flow : b = false E = Else1
+; Beginning of the right op control flow
+; Beginning of a 'and' Control Flow : b = true E = Else1
+; Beginning of the left op control flow
+	LOAD 4(GB), R0
+	CMP #0, R0
+	BEQ EndOfBoolExpr1
+; Beginning of the right op control flow
+	LOAD 3(GB), R0
+	CMP #0, R0
+	BEQ Else1
+EndOfBoolExpr1:
+; End of a 'and' Control Flow : b = true E = Else1
+; End of a 'and' Control Flow : b = false E = Else1
+	WSTR "OK"
+	WNL
+	BRA EndIf0
+Else1:
+EndIf0:
+; Beginning of the computation of a boolean expression
+; Beginning of a 'and' Control Flow : b = false E = ControlFlowBlock0
+; Beginning of the left op control flow
+	LOAD 4(GB), R0
+	CMP #0, R0
+	BNE ControlFlowBlock0
+; Beginning of the right op control flow
+	LOAD 4(GB), R0
+	CMP #0, R0
+	BEQ ControlFlowBlock0
+; End of a 'and' Control Flow : b = false E = ControlFlowBlock0
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr2
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock0:
+	LOAD #1, R2
+EndOfBoolExpr2:
+; End of the computation of a boolean expression
+	STORE R2, 4(GB)
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+; end main program

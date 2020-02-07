@@ -1,0 +1,21 @@
+// Description :
+//      test float recognition
+//
+// Results :
+//
+// History :
+//      created on 9/01/2020
+
+{
+    println(-12.05f);
+    println(023.1F);
+    println(132879489724.2121344);
+    println(10.2e4);
+    println(2.0E-3 + 21.3f);
+
+    //floathex
+    println(0x2a43f.3afP-2f);
+    println(0Xf2a.ffp2F);
+    println(0xf.5P1);
+}
+

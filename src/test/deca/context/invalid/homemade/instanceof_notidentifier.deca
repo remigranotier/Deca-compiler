@@ -1,0 +1,9 @@
+class Ouaip{}
+
+{
+    Ouaip ouaip = new Ouaip();
+    Ouaip ouaipp = new Ouaip();
+    if (ouaipp instanceof ouaip) {
+        println("Ouaip");
+    }
+}

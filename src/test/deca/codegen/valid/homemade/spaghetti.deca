@@ -1,0 +1,26 @@
+// Description:
+ //    hell test
+ //
+ // Results:
+ //
+ //
+ // History:
+ //    created 17/01/2020
+
+ {
+    int x = 3 * 2 / 1;
+    float y = 2.2 * x;
+    boolean z = true;
+    while (z) {
+        if (z || true && z) {
+            y = x + 2.5;
+        } else {
+            print("ERROR");
+        }
+        println("OK ", y);
+        z = false;
+    }
+    x = x * x;
+    println(x);
+
+ }

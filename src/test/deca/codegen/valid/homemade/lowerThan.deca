@@ -1,0 +1,47 @@
+// Description:
+//    test boolean operation <= and <
+//
+// Results:
+//      ok
+//
+// Historique:
+//    cree le 21/01/2020
+
+{
+   if (3<=4) {
+        println("ok1");
+   }
+   if (4<=3) {
+        println("fail1");
+   }
+
+   if (5<=5) {
+        println("ok2");
+   }
+
+   if (3<4) {
+        println("ok3");
+   }
+   if (4<3) {
+        println("fail2");
+   }
+
+      if (4.121<=7.3) {
+           println("ok4");
+      }
+
+      if (5.02<=5.02) {
+           println("ok5");
+      }
+
+      if (5.1213<3.12131) {
+           println("fail3");
+      }
+      if (4.02<7.5890) {
+           println("ok6");
+      }
+
+
+   println("FIN");
+
+}

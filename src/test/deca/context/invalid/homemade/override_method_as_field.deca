@@ -1,0 +1,11 @@
+// Trying to redefine method as field
+
+class A {
+    int x;
+    void y() {}
+}
+
+class B extends A {
+    boolean y;
+    int z() {return 4;}
+}

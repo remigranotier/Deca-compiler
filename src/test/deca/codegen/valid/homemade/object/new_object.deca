@@ -1,0 +1,12 @@
+// Description:
+//
+//
+// Results:
+//
+//
+// History:
+//    cree le 25/01/2020
+
+{
+Object o = new Object();
+}

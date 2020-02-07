@@ -1,0 +1,9 @@
+// trying to call on class something which is not a method
+
+class A {
+    int x;
+}
+{
+    A a = new A();
+    a.x();
+}

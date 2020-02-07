@@ -1,0 +1,11 @@
+// Description :
+//test of variable initialization with a different type
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : < Type boolean cannot be assigned to type int>
+{
+   int a = 2;
+   boolean b = a;
+
+}

@@ -1,0 +1,11 @@
+// Description :
+//test of the exacte comparison between boolean operators
+//
+// Results :
+//ok
+{
+   int a;
+   while(true==false){
+     a=1;
+   }
+}

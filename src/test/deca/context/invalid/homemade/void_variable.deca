@@ -1,0 +1,5 @@
+// trying to give a variable the type void
+
+{
+    void x;
+}

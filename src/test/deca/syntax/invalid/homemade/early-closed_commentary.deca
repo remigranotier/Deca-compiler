@@ -1,0 +1,9 @@
+// Description :
+//      Empty program, testing that the lexer stops at the first */ on commentaries
+//
+// Results :
+//      token error : unrecognized 'b'
+// History :
+//      created on 9/01/2020
+
+/* ca fait bim bam */ boom */

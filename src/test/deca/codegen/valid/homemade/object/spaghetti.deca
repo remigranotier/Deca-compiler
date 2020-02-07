@@ -1,0 +1,35 @@
+// Description:
+//
+//
+// Results:
+//
+//
+// History:
+//    cree le 27/01/2020
+
+
+class A {
+    int a = 35;
+
+    void move(int x) {
+        a = a + 3*x ;
+    }
+
+    void meh(Object o) {
+        println("ok 2 / 2");
+    }
+
+}
+
+{
+    A b = new A();
+    A cheh = new A();
+
+    b.move(2);
+
+    if (b.a == 41) {
+        println("ok 1 / 2");
+    }
+
+    b.meh(cheh);
+}

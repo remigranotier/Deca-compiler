@@ -1,0 +1,123 @@
+; ADDSP : method table size : 2, nb of var 0
+	ADDSP #2
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+	LOAD #1, R2
+	ADD #1, R2
+	LOAD #2, R2
+	ADD #2, R2
+	LOAD #3, R2
+	ADD #3, R2
+; Beginning of the computation of a boolean expression
+; Beginning of a comparison in a control flow
+	LOAD #2, R2
+	CMP #1, R2
+	BGT ControlFlowBlock0
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr0
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock0:
+	LOAD #1, R2
+EndOfBoolExpr0:
+; End of the computation of a boolean expression
+; Beginning of the computation of a boolean expression
+; Beginning of a comparison in a control flow
+	LOAD #3, R2
+	CMP #2, R2
+	BGT ControlFlowBlock1
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr1
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock1:
+	LOAD #1, R2
+EndOfBoolExpr1:
+; End of the computation of a boolean expression
+; Beginning of the computation of a boolean expression
+; Beginning of a comparison in a control flow
+	LOAD #4, R2
+	CMP #3, R2
+	BGT ControlFlowBlock2
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr2
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock2:
+	LOAD #1, R2
+EndOfBoolExpr2:
+; End of the computation of a boolean expression
+; Beginning of the computation of a boolean expression
+; Beginning of a 'and' Control Flow : b = true E = ControlFlowBlock3
+; Beginning of the left op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; Beginning of the right op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA ControlFlowBlock3
+; End of a Boolean Literal control flow
+EndOfBoolExpr4:
+; End of a 'and' Control Flow : b = true E = ControlFlowBlock3
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr3
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock3:
+	LOAD #1, R2
+EndOfBoolExpr3:
+; End of the computation of a boolean expression
+; Beginning of the computation of a boolean expression
+; Beginning of a 'and' Control Flow : b = true E = ControlFlowBlock4
+; Beginning of the left op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; Beginning of the right op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA ControlFlowBlock4
+; End of a Boolean Literal control flow
+EndOfBoolExpr6:
+; End of a 'and' Control Flow : b = true E = ControlFlowBlock4
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr5
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock4:
+	LOAD #1, R2
+EndOfBoolExpr5:
+; End of the computation of a boolean expression
+; Beginning of the computation of a boolean expression
+; Beginning of a 'and' Control Flow : b = true E = ControlFlowBlock5
+; Beginning of the left op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; Beginning of the right op control flow
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA ControlFlowBlock5
+; End of a Boolean Literal control flow
+EndOfBoolExpr8:
+; End of a 'and' Control Flow : b = true E = ControlFlowBlock5
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr7
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock5:
+	LOAD #1, R2
+EndOfBoolExpr7:
+; End of the computation of a boolean expression
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+; end main program

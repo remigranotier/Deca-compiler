@@ -1,0 +1,32 @@
+// Description:
+ //
+ //
+ // Results:
+ //
+ //
+ // History:
+ //    created 17/01/2020
+
+class A {
+    float x;
+
+    void a() {
+        println("this prog should crash before this");
+    }
+}
+
+class B {
+    A a;
+}
+
+//class B extends A {
+//    int z;
+//}
+
+
+{
+    A a = new A();
+    B b = new B();
+    b.a.a();
+}
+

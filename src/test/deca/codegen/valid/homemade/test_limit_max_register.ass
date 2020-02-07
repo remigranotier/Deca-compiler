@@ -1,0 +1,113 @@
+; ADDSP : method table size : 2, nb of var 0
+	ADDSP #2
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+	LOAD #1, R2
+	LOAD #1, R3
+	LOAD #1, R4
+	LOAD #1, R5
+	MUL #1, R5
+	MUL R5, R4
+	MUL R4, R3
+	MUL R3, R2
+	LOAD R2, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WINT
+	WNL
+	LOAD #1, R2
+	LOAD #1, R3
+	LOAD #1, R4
+	LOAD #1, R5
+	ADD #1, R5
+	ADD R5, R4
+	ADD R4, R3
+	ADD R3, R2
+	LOAD R2, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WINT
+	WNL
+	LOAD #1, R2
+	LOAD #1, R3
+	LOAD #1, R4
+	LOAD #1, R5
+	SUB #1, R5
+	SUB R5, R4
+	SUB R4, R3
+	SUB R3, R2
+	LOAD R2, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WINT
+	WNL
+	LOAD #1, R2
+	LOAD #1, R3
+	LOAD #1, R4
+	LOAD #1, R5
+	QUO #1, R5
+	BOV divisionByZero
+	QUO R5, R4
+	BOV divisionByZero
+	QUO R4, R3
+	BOV divisionByZero
+	QUO R3, R2
+	BOV divisionByZero
+	LOAD R2, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WINT
+	WNL
+	LOAD #1, R2
+	LOAD #2, R3
+	LOAD #3, R4
+	LOAD #4, R5
+	REM #5, R5
+	BOV moduloByZero
+	REM R5, R4
+	BOV moduloByZero
+	REM R4, R3
+	BOV moduloByZero
+	REM R3, R2
+	BOV moduloByZero
+	LOAD R2, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WINT
+	WNL
+	LOAD #1, R2
+	LOAD #1, R3
+	LOAD #1, R4
+	LOAD #1, R5
+	LOAD #1, R6
+	REM #1, R6
+	BOV moduloByZero
+	ADD R6, R5
+	QUO R5, R4
+	BOV divisionByZero
+	SUB R4, R3
+	MUL R3, R2
+	LOAD R2, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WINT
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+moduloByZero:
+	WSTR "ERROR : Can't do a modulo by 0 !"
+	WNL
+	ERROR
+divisionByZero:
+	WSTR "ERROR : Can't divide by 0 !"
+	WNL
+	ERROR
+; end main program

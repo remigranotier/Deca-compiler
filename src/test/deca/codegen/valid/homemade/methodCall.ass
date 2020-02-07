@@ -1,0 +1,207 @@
+; ADDSP : method table size : 13, nb of var 2
+	ADDSP #15
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD Code.A.a, R0
+	STORE R0, 5(GB)
+	LOAD Code.A.b, R0
+	STORE R0, 6(GB)
+	LOAD Code.A.d, R0
+	STORE R0, 7(GB)
+; Generation of the method table of : B
+	LEA 3(GB), R0
+	STORE R0, 8(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 9(GB)
+	LOAD Code.A.a, R0
+	STORE R0, 10(GB)
+	LOAD Code.B.b, R0
+	STORE R0, 11(GB)
+	LOAD Code.B.d, R0
+	STORE R0, 12(GB)
+	LOAD Code.B.c, R0
+	STORE R0, 13(GB)
+; Main program
+; Global variables initialization
+	NEW #1, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 14(GB)
+	NEW #1, R2
+	BOV heapFull
+	LEA 8(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 15(GB)
+; Beginning of main instructions:
+	LOAD 14(GB), R2
+; Beginning of a method call : method at index 1 ; with 0 params.
+	ADDSP #1
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD 14(GB), R2
+; Beginning of a method call : method at index 2 ; with 0 params.
+	ADDSP #1
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #1
+	LOAD 15(GB), R2
+; Beginning of a method call : method at index 1 ; with 0 params.
+	ADDSP #1
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD 15(GB), R2
+; Beginning of a method call : method at index 2 ; with 0 params.
+	ADDSP #1
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #1
+	LOAD 15(GB), R2
+; Beginning of a method call : method at index 4 ; with 0 params.
+	ADDSP #1
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	SUBSP #1
+	LOAD 14(GB), R2
+; Beginning of a method call : method at index 3 ; with 3 params.
+	ADDSP #4
+	STORE R2, 0(SP)
+	LOAD #1, R2
+	STORE R2, -1(SP)
+	LOAD #2, R2
+	STORE R2, -2(SP)
+	LOAD #0x1.8p1, R2
+	STORE R2, -3(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	SUBSP #4
+	LOAD 15(GB), R2
+; Beginning of a method call : method at index 3 ; with 3 params.
+	ADDSP #4
+	STORE R2, 0(SP)
+	LOAD #1, R2
+	STORE R2, -1(SP)
+	LOAD #2, R2
+	STORE R2, -2(SP)
+	LOAD #0x1.8p1, R2
+	STORE R2, -3(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	SUBSP #4
+	LOAD #1, R2
+	ADD #1, R2
+	HALT
+init.object:
+	RTS
+init.A:
+; save registers
+; initialization of own fields
+; restore registers
+	RTS
+init.B:
+; save registers
+	LOAD -2(LB), R1
+; Call for initialization of inherited fields
+	PUSH R1
+	BSR init.A
+	SUBSP #1	; We get the stack back to its initial state
+; finished dealing with inheritance
+; initialization of own fields
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.A.a:
+; save registers
+	WSTR "ok"
+	WNL
+fin.A.a:
+; restore registers
+	RTS
+code.A.b:
+; save registers
+	WSTR "not ok"
+	WNL
+fin.A.b:
+; restore registers
+	RTS
+code.A.d:
+; save registers
+	LOAD -3(LB), R1
+	WINT
+	WSTR " ; "
+	LOAD -4(LB), R1
+	WINT
+	WSTR " ; "
+	LOAD -5(LB), R1
+	WFLOAT
+	WNL
+fin.A.d:
+; restore registers
+	RTS
+code.B.b:
+; save registers
+	WSTR "ok"
+	WNL
+fin.B.b:
+; restore registers
+	RTS
+code.B.c:
+; save registers
+	WSTR "ok"
+	WNL
+fin.B.c:
+; restore registers
+	RTS
+code.B.d:
+; save registers
+	LOAD -5(LB), R1
+	WFLOAT
+	WSTR " ; "
+	LOAD -4(LB), R1
+	WINT
+	WSTR " ; "
+	LOAD -3(LB), R1
+	WINT
+	WNL
+fin.B.d:
+; restore registers
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

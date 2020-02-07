@@ -1,0 +1,15 @@
+// Description :
+//      Program testing a while loop
+//
+// Results :
+//
+// History :
+//      created on 9/01/2020
+
+{
+    while(false) {
+        println("do some stuff");
+    }
+    println("wow, this took a while !");
+}
+

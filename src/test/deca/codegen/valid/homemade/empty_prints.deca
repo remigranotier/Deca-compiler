@@ -1,0 +1,13 @@
+// Description:
+//    print nothing
+//
+// Results:
+//
+//
+// History:
+//    created 18/01/2020
+
+{
+   println(); //must generate a WNL
+   print(); //must generate nothing
+}

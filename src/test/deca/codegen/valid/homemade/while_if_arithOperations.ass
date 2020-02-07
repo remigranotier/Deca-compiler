@@ -1,0 +1,101 @@
+; ADDSP : method table size : 2, nb of var 2
+	ADDSP #4
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+	LOAD #0, R2
+	STORE R2, 3(GB)
+	LOAD #0, R2
+	STORE R2, 4(GB)
+; Beginning of a new while loop
+	BRA WhileCondition0
+WhileBeginning0:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 3(GB), R2
+	REM #4, R2
+	BOV moduloByZero
+	CMP #0, R2
+	BNE Else0
+	LOAD 4(GB), R2
+	QUO #1, R2
+	BOV divisionByZero
+	STORE R2, 4(GB)
+	BRA EndIf0
+Else0:
+EndIf0:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 3(GB), R2
+	REM #4, R2
+	BOV moduloByZero
+	CMP #1, R2
+	BNE Else1
+	LOAD 4(GB), R2
+	MUL #1, R2
+	STORE R2, 4(GB)
+	BRA EndIf1
+Else1:
+EndIf1:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 3(GB), R2
+	REM #4, R2
+	BOV moduloByZero
+	CMP #2, R2
+	BNE Else2
+	LOAD 4(GB), R2
+	ADD #1, R2
+	STORE R2, 4(GB)
+	BRA EndIf2
+Else2:
+EndIf2:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 3(GB), R2
+	REM #4, R2
+	BOV moduloByZero
+	CMP #3, R2
+	BNE Else3
+	LOAD 4(GB), R2
+	ADD #1, R2
+	STORE R2, 4(GB)
+	BRA EndIf3
+Else3:
+EndIf3:
+	LOAD 3(GB), R2
+	ADD #1, R2
+	STORE R2, 3(GB)
+WhileCondition0:
+; Beginning of a comparison in a control flow
+	LOAD 3(GB), R2
+	CMP #100, R2
+	BLT WhileBeginning0
+; End of a while loop
+	LOAD 4(GB), R1
+	WINT
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+moduloByZero:
+	WSTR "ERROR : Can't do a modulo by 0 !"
+	WNL
+	ERROR
+divisionByZero:
+	WSTR "ERROR : Can't divide by 0 !"
+	WNL
+	ERROR
+; end main program

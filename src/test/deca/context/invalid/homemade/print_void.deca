@@ -1,0 +1,12 @@
+// Description :
+// Trying to print void in main
+
+class A {
+    void x() {
+    }
+}
+
+{
+    A a = new A();
+    println(a.x());
+}

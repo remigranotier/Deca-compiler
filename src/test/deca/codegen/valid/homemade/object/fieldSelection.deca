@@ -1,0 +1,43 @@
+// Description:
+ //    empty instruction
+ //
+ // Results:
+ //     0.00000e+00 ; 0 ; 0 ; 0.00000e+00
+ //     1.00000e+01
+ //     9.00000e+00
+ //
+ // History:
+ //    created 17/01/2020
+
+class A {
+    float x;
+    int y;
+}
+
+class B {
+    int x;
+    A a;
+}
+
+//class B extends A {
+//    int z;
+//}
+
+
+{
+    A a = new A();
+    B b = new B();
+    b.a = new A();
+
+    println(a.x, " ; ",  a.y, " ; ", b.x, " ; ", b.a.x);
+    //println(b.y, b.z);
+    a.x = 7.0;
+    b.x = 3;
+    println(a.x + b.x);
+
+    b.a.x = 1 * 2;
+    println(a.x + b.a.x);
+
+    1 + 1; //useless instruction, just to see if compiler start using registers from R2 after preceding inst.
+}
+

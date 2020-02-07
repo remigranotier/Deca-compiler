@@ -1,0 +1,564 @@
+	TSTO #16	; Max nb of stored register : 4 , ADDSP : 12
+	BOV stackOverflow
+; ADDSP : method table size : 11, nb of var 1
+	ADDSP #12
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : Rectangle
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD Code.Rectangle.set, R0
+	STORE R0, 5(GB)
+	LOAD Code.Rectangle.setSize, R0
+	STORE R0, 6(GB)
+; Generation of the method table of : TestClass
+	LEA 1(GB), R0
+	STORE R0, 7(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 8(GB)
+	LOAD Code.TestClass.go, R0
+	STORE R0, 9(GB)
+	LOAD Code.TestClass.alterPointee, R0
+	STORE R0, 10(GB)
+	LOAD Code.TestClass.alterPointer, R0
+	STORE R0, 11(GB)
+; Main program
+; Global variables initialization
+	NEW #1, R2
+	BOV heapFull
+	LEA 7(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.TestClass
+	POP R2
+	STORE R2, 12(GB)
+; Beginning of main instructions:
+	LOAD 12(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 1 ; with 0 params.
+	ADDSP #1
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	HALT
+init.object:
+	RTS
+init.Rectangle:
+; Nothing stacked : can't have a stack overflow
+; save registers
+; initialization of own fields
+; Initialization of field x
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 1(R1)
+; Initialization of field y
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 2(R1)
+; Initialization of field width
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 3(R1)
+; Initialization of field height
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 4(R1)
+; restore registers
+	RTS
+init.TestClass:
+; Nothing stacked : can't have a stack overflow
+; save registers
+; initialization of own fields
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.Rectangle.set:
+	TSTO #2	; Max nb of stored register : 2 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R3
+	PUSH R2
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	STORE R2, 1(R3)
+	LOAD -4(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	STORE R2, 2(R3)
+	LOAD -5(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	STORE R2, 3(R3)
+	LOAD -6(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	STORE R2, 4(R3)
+fin.Rectangle.set:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+code.Rectangle.setSize:
+	TSTO #2	; Max nb of stored register : 2 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R3
+	PUSH R2
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	STORE R2, 3(R3)
+	LOAD -4(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	STORE R2, 4(R3)
+fin.Rectangle.setSize:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+code.TestClass.go:
+	TSTO #9	; Max nb of stored register : 8 , ADDSP : 1
+	BOV stackOverflow
+; save registers
+	PUSH R2
+	ADDSP #1
+	NEW #5, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Rectangle
+	POP R2
+	STORE R2, 1(LB)
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 1 ; with 4 params.
+	ADDSP #5
+	STORE R2, 0(SP)
+	LOAD #0, R2
+	STORE R2, -1(SP)
+	LOAD #0, R2
+	STORE R2, -2(SP)
+	LOAD #5, R2
+	STORE R2, -3(SP)
+	LOAD #5, R2
+	STORE R2, -4(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #5
+	WSTR "In method go. r1 : "
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 2 ; with 2 params.
+	ADDSP #3
+	STORE R2, 0(SP)
+	LOAD #10, R2
+	STORE R2, -1(SP)
+	LOAD #15, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+	WSTR "In method go. r1 : "
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 2 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #2
+	WSTR "In method go. r1 : "
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 3 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	SUBSP #2
+	WSTR "In method go. r1 : "
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD 1(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+fin.TestClass.go:
+	SUBSP #1
+; restore registers
+	POP R2
+	RTS
+code.TestClass.alterPointee:
+	TSTO #5	; Max nb of stored register : 5 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R2
+	WSTR "In method alterPointee. r : "
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 2 ; with 2 params.
+	ADDSP #3
+	STORE R2, 0(SP)
+	LOAD #20, R2
+	STORE R2, -1(SP)
+	LOAD #30, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+	WSTR "In method alterPointee. r : "
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+fin.TestClass.alterPointee:
+; restore registers
+	POP R2
+	RTS
+code.TestClass.alterPointer:
+	TSTO #7	; Max nb of stored register : 7 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R2
+	WSTR "In method alterPointer. r "
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 1 ; with 4 params.
+	ADDSP #5
+	STORE R2, 0(SP)
+	LOAD #5, R2
+	STORE R2, -1(SP)
+	LOAD #10, R2
+	STORE R2, -2(SP)
+	LOAD #30, R2
+	STORE R2, -3(SP)
+	LOAD #35, R2
+	STORE R2, -4(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #5
+	WSTR "In method alterPointer. r "
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 2(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 3(R2), R1
+	WINT
+	WNL
+	LOAD -3(LB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 4(R2), R1
+	WINT
+	WNL
+fin.TestClass.alterPointer:
+; restore registers
+	POP R2
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+stackOverflow:
+	WSTR "ERROR : stack overflow"
+	WNL
+	ERROR
+nullDereferencement:
+	WSTR "ERROR : null dereferencement"
+	WNL
+	ERROR
+; end main program

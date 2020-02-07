@@ -1,0 +1,12 @@
+// Description:
+//    do a substraction with positive result
+//
+// Results:
+//
+//
+// History:
+//    created 14/01/2020
+
+{
+   println(5-1);
+}

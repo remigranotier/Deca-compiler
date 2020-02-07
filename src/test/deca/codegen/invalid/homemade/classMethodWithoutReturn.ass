@@ -1,0 +1,83 @@
+; ADDSP : method table size : 5, nb of var 1
+	ADDSP #6
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : P
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD Code.P.move, R0
+	STORE R0, 5(GB)
+; Main program
+; Global variables initialization
+	NEW #2, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.P
+	POP R2
+	STORE R2, 6(GB)
+; Beginning of main instructions:
+	LOAD 6(GB), R2
+; Beginning of a method call : method at index 1 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD #3, R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #2
+	LOAD 6(GB), R2
+	LOAD 1(R2), R1
+	WINT
+	WNL
+	LOAD #1, R2
+	ADD #1, R2
+	HALT
+init.object:
+	RTS
+init.P:
+; save registers
+; initialization of own fields
+; Initialization of field x
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 1(R1)
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.P.move:
+; save registers
+	PUSH R3
+	PUSH R2
+	LOAD -2(LB), R2
+	LOAD 1(R2), R2
+	LOAD -3(LB), R3
+	ADD R3, R2
+	LOAD -2(LB), R3
+	STORE R2, 1(R3)
+	WSTR "ERROR : exited method P.move with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.P.move:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,5 @@
+{
+	printx(16);
+	printlnx(2.5+1);
+	printlnx("cocu");
+}

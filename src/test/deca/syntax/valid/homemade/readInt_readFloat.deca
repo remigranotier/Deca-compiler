@@ -1,0 +1,14 @@
+// Description :
+//      Testing the reading of readInt/readFloat
+//
+// Results :
+//
+// History :
+//      created on 9/01/2020
+
+{
+
+    readInt();
+    readFloat();
+}
+

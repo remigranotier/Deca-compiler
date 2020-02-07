@@ -1,0 +1,10 @@
+// Description :
+//test of use of a not declared variable
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : <Identifier "a" is not defined in current context (0.1)>
+{
+   int c;
+   c = a + c;
+}

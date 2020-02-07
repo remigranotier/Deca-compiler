@@ -1,0 +1,19 @@
+// Description:
+ //    boolean hell test
+ //
+ // Results:
+ //
+ //
+ // History:
+ //    created 17/01/2020
+
+{
+    boolean x = true;
+    boolean y = false;
+    if (!(x || y) && !(x && y)) {
+        println("Error");
+    } else if (x && x && (!y||x)) {
+        println("OK");
+    }
+    y = y || !y;
+}

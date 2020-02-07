@@ -1,0 +1,96 @@
+// Description:
+ //    instanceof test
+ //
+ // Results:
+ //
+ //
+ // History:
+ //    created 22/01/2020
+
+class A {
+    void a() {
+        println("ok");
+    }
+}
+
+class B extends A {
+    void b() {
+        println("ok");
+    }
+}
+
+class C {
+}
+
+{
+    A a = new A();
+    B b1 = new B();
+    A b2 = new B();
+    C c1 = new C();
+
+    boolean b = b2 instanceof B;
+    boolean c = !(a instanceof A);
+
+    if (b2 instanceof B) {
+        println("ok");
+    } else {
+        println("not ok");
+    }
+
+    if (b2 instanceof A) {
+        println("ok");
+    } else {
+        println("not ok");
+    }
+
+    if (b2 instanceof Object) {
+        println("ok");
+    } else {
+        println("not ok");
+    }
+
+    if (b1 instanceof A) {
+        println("ok");
+    } else {
+        println("not ok");
+    }
+
+
+    if (a instanceof B) {
+        println("not ok");
+    } else {
+        println("ok");
+    }
+
+
+    if (!(b2 instanceof B)) {
+        println("not ok");
+    } else {
+        println("ok");
+    }
+
+    if (!(b2 instanceof Object)) {
+        println("wtf");
+    } else {
+        println("ok");
+    }
+
+    if (b) {
+        println("ok");
+    } else {
+        println("oopsie");
+    }
+
+    if (!c) {
+        println("ok");
+    } else {
+        println("oopsie");
+    }
+
+    if (c1 instanceof A) {
+        println("nope");
+    }
+
+    1 + 1;
+}
+

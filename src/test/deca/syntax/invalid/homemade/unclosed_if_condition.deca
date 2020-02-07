@@ -1,0 +1,18 @@
+// Description :
+//      Empty program
+//
+// Results :
+//       missing '}' at 'else'
+//
+// History :
+//      created on 15/01/2020
+
+{
+    if true) {
+        println("ok");
+    } else {
+        println("this should definitely not show up");
+    }
+
+}
+

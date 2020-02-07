@@ -1,0 +1,12 @@
+// Description :
+//test of the exacte comparison between boolean operators
+//
+// Results :
+//ok
+{
+   int a = 0;
+   while(true==false){
+     a=1;
+   }
+   print(a);
+}

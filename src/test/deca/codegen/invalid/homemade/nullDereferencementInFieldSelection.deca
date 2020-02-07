@@ -1,0 +1,31 @@
+// Description:
+ //
+ //
+ // Results:
+ //
+ //
+ // History:
+ //    created 17/01/2020
+
+class A {
+    float x;
+    int y;
+}
+
+class B {
+    int x;
+    A a;
+}
+
+//class B extends A {
+//    int z;
+//}
+
+
+{
+    A a = new A();
+    B b = new B();
+
+    println(a.x, " ; ",  a.y, " ; ", b.x, " ; ", b.a.x); //b.a.x will do a null dereferencement error, as b.a is initialized to null
+}
+

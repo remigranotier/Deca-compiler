@@ -1,0 +1,4 @@
+{
+	readInt();
+	readFloat();
+}

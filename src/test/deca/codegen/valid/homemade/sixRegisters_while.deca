@@ -1,0 +1,25 @@
+// Description:
+//    check an operation using 6 registers and using while and vars
+//
+// Results:
+//      ok
+//
+// History:
+//    created 21/01/2020
+
+{
+    int i;
+    int n;
+
+    i = 0;
+    n = 0;
+
+    while (i< 100) {
+
+        n = 1 + n;
+
+        i = 1 + i;
+    }
+
+    println(n); // expect 100
+}

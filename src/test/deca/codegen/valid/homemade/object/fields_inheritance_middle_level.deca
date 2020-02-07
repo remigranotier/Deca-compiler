@@ -1,0 +1,35 @@
+// Description:
+//    classes with fields only, one inherits from the other
+//
+// Results:
+//
+//
+// History:
+//    cree le 24/01/2020
+
+
+class C {
+    int x;
+    int y = 1;
+
+}
+
+class D extends C {
+    int x = 3;
+    int z;
+
+}
+
+
+{
+   C c = new C();
+   D d = new D();
+
+   println(c.x); // expect 0
+   println(c.y); // expect 1
+
+   println(d.x); // expect 3
+   println(d.y); // expect 1 RETURNS 3
+   println(d.z); // expect 0
+
+}

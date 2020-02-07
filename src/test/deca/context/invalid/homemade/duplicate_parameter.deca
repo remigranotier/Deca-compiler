@@ -1,0 +1,5 @@
+// trying to create parameter twice
+
+class A {
+    void x(int z, float z) {}
+}

@@ -1,0 +1,32 @@
+ // Description:
+ //    empty instruction
+ //
+ // Results:
+ //     4
+ //
+ // History:
+ //    created 17/01/2020
+
+class A {
+    void a() {
+        println("ok");
+    }
+
+    void b() {
+        println("not ok");
+    }
+}
+
+class B extends A {
+    void b() {
+        println("ok");
+    }
+
+    void c() {
+        println("ok");
+    }
+}
+
+
+{}
+

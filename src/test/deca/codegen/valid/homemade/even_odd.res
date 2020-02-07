@@ -1,0 +1,1 @@
+Entered number is even

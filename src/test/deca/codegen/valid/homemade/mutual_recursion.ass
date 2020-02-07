@@ -1,0 +1,117 @@
+; ADDSP : method table size : 8, nb of var 2
+	ADDSP #10
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD Code.A.setB, R0
+	STORE R0, 5(GB)
+; Generation of the method table of : B
+	LEA 1(GB), R0
+	STORE R0, 6(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD Code.B.setA, R0
+	STORE R0, 8(GB)
+; Main program
+; Global variables initialization
+	NEW #2, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 9(GB)
+	NEW #2, R2
+	BOV heapFull
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 10(GB)
+; Beginning of main instructions:
+	LOAD 9(GB), R2
+; Beginning of a method call : method at index 1 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 10(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #2
+	LOAD 10(GB), R2
+; Beginning of a method call : method at index 1 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 9(GB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #2
+	HALT
+init.object:
+	RTS
+init.A:
+; save registers
+; initialization of own fields
+; Initialization of field b
+	LOAD -2(LB), R1
+	LOAD #null, R0
+	STORE R0, 1(R1)
+; restore registers
+	RTS
+init.B:
+; save registers
+; initialization of own fields
+; Initialization of field a
+	LOAD -2(LB), R1
+	LOAD #null, R0
+	STORE R0, 1(R1)
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.A.setB:
+; save registers
+	PUSH R3
+	PUSH R2
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	STORE R2, 1(R3)
+fin.A.setB:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+code.B.setA:
+; save registers
+	PUSH R3
+	PUSH R2
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	STORE R2, 1(R3)
+fin.B.setA:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

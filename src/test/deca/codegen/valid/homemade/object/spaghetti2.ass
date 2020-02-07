@@ -1,0 +1,99 @@
+	TSTO #15	; Max nb of stored register : 5 , ADDSP : 10
+	BOV stackOverflow
+; ADDSP : method table size : 8, nb of var 2
+	ADDSP #10
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+; Generation of the method table of : B
+	LEA 1(GB), R0
+	STORE R0, 5(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 6(GB)
+; Generation of the method table of : C
+	LEA 3(GB), R0
+	STORE R0, 7(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 8(GB)
+; Main program
+; Global variables initialization
+	NEW #3, R2
+	BOV heapFull
+	LEA 7(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.C
+	POP R2
+	STORE R2, 9(GB)
+	NEW #2, R2
+	BOV heapFull
+	LEA 5(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 10(GB)
+; Beginning of main instructions:
+	HALT
+init.object:
+	RTS
+init.A:
+; Nothing stacked : can't have a stack overflow
+; save registers
+; initialization of own fields
+; Initialization of field thirty
+	LOAD -2(LB), R1
+	LOAD #30, R0
+	STORE R0, 1(R1)
+; Initialization of field b
+	LOAD -2(LB), R1
+	LOAD #null, R0
+	STORE R0, 2(R1)
+; restore registers
+	RTS
+init.B:
+; Nothing stacked : can't have a stack overflow
+; save registers
+; initialization of own fields
+; Initialization of field c
+	LOAD -2(LB), R1
+	LOAD #null, R0
+	STORE R0, 1(R1)
+; restore registers
+	RTS
+init.C:
+	TSTO #3	; Max nb of stored register : 3 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	LOAD -2(LB), R1
+; Call for initialization of inherited fields
+	PUSH R1
+	BSR init.A
+	SUBSP #1	; We get the stack back to its initial state
+; finished dealing with inheritance
+; initialization of own fields
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+stackOverflow:
+	WSTR "ERROR : stack overflow"
+	WNL
+	ERROR
+; end main program

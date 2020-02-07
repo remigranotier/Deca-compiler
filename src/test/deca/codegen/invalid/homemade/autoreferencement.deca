@@ -1,0 +1,8 @@
+
+class A {
+	A a = new A();
+}
+
+{
+	A classe = new A();
+}

@@ -1,0 +1,45 @@
+class A {
+    int x;
+    boolean equals(Object other) {
+        if (other instanceof A) {
+            return this.x == ((A) (other) .x);
+        } else {
+            return false;
+        }
+    }
+}
+
+{
+    A a1 = new A();
+    A a2 = new A();
+    A a3 = new A();
+    Object o = new Object();
+
+    a1.x = 1;
+    a2.x = 1;
+    a3.x = 3;
+
+    if (a1.equals(a2)) {
+        println("ok");
+    } else {
+        println("o no");
+    }
+
+    if (a1.equals(a3)) {
+        println("o no");
+    } else {
+        println("ok");
+    }
+
+    if (a2.equals(a1)) {
+        println("ok");
+    } else {
+        println("o no");
+    }
+
+    if (a1.equals(o)) {
+        println("o no");
+    } else {
+        println("ok");
+    }
+}

@@ -1,0 +1,5 @@
+// trying to initialize new on something which is not a class
+
+{
+    int a = new int();
+}

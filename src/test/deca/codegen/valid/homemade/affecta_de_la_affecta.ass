@@ -1,0 +1,43 @@
+; ADDSP : method table size : 2, nb of var 4
+	ADDSP #6
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+	LOAD #0x1.4p1, R2
+	STORE R2, 3(GB)
+	LOAD #5, R2
+	STORE R2, 5(GB)
+	LOAD 3(GB), R2
+	LOAD 5(GB), R3
+	FLOAT R3, R3
+	ADD R3, R2
+	STORE R2, 6(GB)
+; Beginning of main instructions:
+	LOAD 5(GB), R2
+	STORE R2, 4(GB)
+	FLOAT R2, R2
+	STORE R2, 3(GB)
+	LOAD 4(GB), R1
+	WINT
+	WNL
+	LOAD 3(GB), R1
+	WFLOAT
+	WNL
+	LOAD 6(GB), R1
+	WFLOAT
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+; end main program

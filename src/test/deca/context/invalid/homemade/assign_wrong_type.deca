@@ -1,0 +1,12 @@
+// Description :
+//test of variable initialization with a different type
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <10> : < Type boolean cannot be assigned to type int>
+{
+   boolean c = true;
+   while(c){
+    c=2;
+   }
+}

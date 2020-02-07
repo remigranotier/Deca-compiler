@@ -1,0 +1,10 @@
+#include "Math.decah"
+
+{
+Math m = new Math();
+println("sin(0) = ", m.sin(0.0));
+println("sin(pi/6) = ", m.sin(m._pi/6));
+println("sin(pi/4) = ", m.sin(m._pi/4));
+println("sin(pi/3) = ", m.sin(m._pi/3));
+println("sin(pi/2) = ", m.sin(m._pi/2));
+}

@@ -1,0 +1,16 @@
+// Description:
+//    case where there are two assignements but not operation lines to generate
+//
+// Results:
+//
+//
+// History:
+//    created 21/01/2020
+
+{
+    int a;
+    int b;
+   (a = 2) + (b = 3);
+    println(a);
+    println(b);// expect assignements a=2 and b=3 but nothing else
+}

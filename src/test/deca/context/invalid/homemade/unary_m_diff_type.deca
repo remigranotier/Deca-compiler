@@ -1,0 +1,11 @@
+// Description :
+//test of unary minus operation with operand that is not int or float
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : <Unary minus operand must be int or float but is boolean(3.33)>
+{
+   boolean a = false;
+   a = -a;
+
+}

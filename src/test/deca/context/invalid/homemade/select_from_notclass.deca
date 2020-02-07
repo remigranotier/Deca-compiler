@@ -1,0 +1,7 @@
+// trying to select a field from something which is not a class
+
+{
+    int x = 3;
+    int y = 5;
+    print(x.y);
+}

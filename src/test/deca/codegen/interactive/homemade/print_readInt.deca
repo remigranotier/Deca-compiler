@@ -1,0 +1,12 @@
+// Description:
+//    reads an int and prints it back without assignment.
+//
+// Results:
+//  ok
+//
+// History:
+//    created 21/01/2020
+
+{
+  println(readInt());
+}

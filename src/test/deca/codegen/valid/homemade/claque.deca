@@ -1,0 +1,7 @@
+{
+	boolean a;
+	boolean b;
+	if ((a=true)&&(b=true)) {
+		print("owo");
+	}
+}

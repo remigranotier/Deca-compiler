@@ -1,0 +1,12 @@
+// Description:
+//    test error when boolean operation & is used on floats
+//
+// Results:
+//
+//
+// Historique:
+//    cree le 21/01/2020
+
+{
+   print(1.0 && 2.3);
+}

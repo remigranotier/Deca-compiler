@@ -1,0 +1,15 @@
+// Description :
+//      program with wrong order of if else
+//
+// Results :
+//
+// History :
+//      created on 11/01/2020
+
+{
+    else {
+        print("ayaya");
+    } if (true) {
+        print("ayaya");
+    }
+}

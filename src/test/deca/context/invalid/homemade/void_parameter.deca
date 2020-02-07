@@ -1,0 +1,5 @@
+// trying to give a parameter the type void
+
+class A {
+    int x(void z) {}
+}

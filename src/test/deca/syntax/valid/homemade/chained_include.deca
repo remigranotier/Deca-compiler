@@ -1,0 +1,11 @@
+// Description :
+//      Empty program
+//
+// Results :
+//      this is definitely fine !
+// History :
+//      created on 9/01/2020
+
+#include "chained_include.decah"
+"fine !");
+}

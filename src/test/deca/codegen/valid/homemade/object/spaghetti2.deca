@@ -1,0 +1,30 @@
+// Description:
+//
+//
+// Results:
+//
+//
+// History:
+//    cree le 27/01/2020
+
+
+class A {
+
+    float thirty = 30;
+    B b;
+
+}
+
+class B {
+    C c;
+}
+
+
+class C extends A {
+
+}
+
+{
+    C objectC = new C();
+    B objectB = new B();
+}

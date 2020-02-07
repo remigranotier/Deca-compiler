@@ -1,0 +1,6 @@
+// trying to create method twice
+
+class A {
+    int x(float y) { return 3; }
+    int x(float y) { return 3; }
+}

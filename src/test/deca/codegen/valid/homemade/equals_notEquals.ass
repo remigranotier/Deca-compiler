@@ -1,0 +1,83 @@
+; ADDSP : method table size : 2, nb of var 0
+	ADDSP #2
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #4, R2
+	CMP #4, R2
+	BEQ Else0
+	WSTR "fail1"
+	WNL
+	BRA EndIf0
+Else0:
+EndIf0:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #4, R2
+	CMP #3, R2
+	BEQ Else1
+	WSTR "ok1"
+	WNL
+	BRA EndIf1
+Else1:
+EndIf1:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #5, R2
+	CMP #4, R2
+	BNE Else2
+	WSTR "fail2"
+	WNL
+	BRA EndIf2
+Else2:
+EndIf2:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #4, R2
+	CMP #4, R2
+	BNE Else3
+	WSTR "ok2"
+	WNL
+	BRA EndIf3
+Else3:
+EndIf3:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #4, R2
+	CMP #4, R2
+	BNE Else4
+	WSTR "ok3"
+	WNL
+	BRA EndIf4
+Else4:
+EndIf4:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #4, R2
+	CMP #4, R2
+	BEQ Else5
+	WSTR "fail3"
+	WNL
+	BRA EndIf5
+Else5:
+EndIf5:
+	WSTR "FIN"
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+; end main program

@@ -1,0 +1,8 @@
+// trying to assign value to class
+
+class A {
+}
+
+{
+    A = 2;
+}

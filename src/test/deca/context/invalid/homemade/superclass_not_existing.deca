@@ -1,0 +1,9 @@
+// Description :
+// Trying to create a class extended a non-existant class
+
+class A {
+}
+class B extends A {
+}
+class C extends D {
+}

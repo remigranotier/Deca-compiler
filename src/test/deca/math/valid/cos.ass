@@ -1,0 +1,1089 @@
+	TSTO #20	; Max nb of stored register : 5 , ADDSP : 15
+	BOV stackOverflow
+; ADDSP : method table size : 14, nb of var 1
+	ADDSP #15
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : Math
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD Code.Math._abs, R0
+	STORE R0, 5(GB)
+	LOAD Code.Math._pow, R0
+	STORE R0, 6(GB)
+	LOAD Code.Math._fact, R0
+	STORE R0, 7(GB)
+	LOAD Code.Math._modulo2pi, R0
+	STORE R0, 8(GB)
+	LOAD Code.Math.ulp, R0
+	STORE R0, 9(GB)
+	LOAD Code.Math.sin, R0
+	STORE R0, 10(GB)
+	LOAD Code.Math.cos, R0
+	STORE R0, 11(GB)
+	LOAD Code.Math.asin, R0
+	STORE R0, 12(GB)
+	LOAD Code.Math.atan, R0
+	STORE R0, 13(GB)
+	LOAD Code.Math._atan, R0
+	STORE R0, 14(GB)
+; Main program
+; Global variables initialization
+	NEW #2, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Math
+	POP R2
+	STORE R2, 15(GB)
+; Beginning of main instructions:
+	WSTR "cos(0) = "
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 7 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD #0x0.0p0, R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 8(R2)
+	SUBSP #2
+	LOAD R0, R1
+	WFLOAT
+	WNL
+	WSTR "cos(pi/6) = "
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 7 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R2
+	LOAD #6, R3
+	FLOAT R3, R3
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 8(R2)
+	SUBSP #2
+	LOAD R0, R1
+	WFLOAT
+	WNL
+	WSTR "cos(pi/4) = "
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 7 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R2
+	LOAD #4, R3
+	FLOAT R3, R3
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 8(R2)
+	SUBSP #2
+	LOAD R0, R1
+	WFLOAT
+	WNL
+	WSTR "cos(pi/3) = "
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 7 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R2
+	LOAD #3, R3
+	FLOAT R3, R3
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 8(R2)
+	SUBSP #2
+	LOAD R0, R1
+	WFLOAT
+	WNL
+	WSTR "cos(pi/2) = "
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+; Beginning of a method call : method at index 7 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD 15(GB), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 1(R2), R2
+	LOAD #2, R3
+	FLOAT R3, R3
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 8(R2)
+	SUBSP #2
+	LOAD R0, R1
+	WFLOAT
+	WNL
+	HALT
+init.object:
+	RTS
+init.Math:
+; Nothing stacked : can't have a stack overflow
+; save registers
+; initialization of own fields
+; Initialization of field _pi
+	LOAD -2(LB), R1
+	LOAD #0x1.921fb6p1, R0
+	STORE R0, 1(R1)
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.Math._abs:
+	TSTO #2	; Max nb of stored register : 2 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R3
+	PUSH R2
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD -3(LB), R2
+	CMP #0x0.0p0, R2
+	BGE Else0
+	LOAD #0x1.0p0, R2
+	OPP R2, R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD R2, R0
+	BRA fin.Math._abs
+	BRA EndIf0
+Else0:
+EndIf0:
+	LOAD -3(LB), R2
+	ADD #0x0.0p0, R2
+	BOV arithOverflow
+	LOAD R2, R0
+	BRA fin.Math._abs
+	WSTR "ERROR : exited method Math._abs with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math._abs:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+code.Math._pow:
+	TSTO #5	; Max nb of stored register : 5 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R4
+	PUSH R3
+	PUSH R2
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD -4(LB), R2
+	CMP #0, R2
+	BNE Else1
+	LOAD #0x1.0p0, R2
+	LOAD R2, R0
+	BRA fin.Math._pow
+	BRA EndIf1
+Else1:
+EndIf1:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD -4(LB), R2
+	CMP #0, R2
+	BGE Else2
+	LOAD #1, R2
+	FLOAT R2, R2
+	LOAD -2(LB), R3
+; Beginning of a method call : method at index 2 ; with 2 params.
+	ADDSP #3
+	STORE R3, 0(SP)
+	LOAD -3(LB), R3
+	STORE R3, -1(SP)
+	LOAD -4(LB), R3
+	OPP R3, R3
+	STORE R3, -2(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #3
+	LOAD R0, R3
+	DIV R3, R2
+	BOV arithOverflow
+	LOAD R2, R0
+	BRA fin.Math._pow
+	BRA EndIf2
+Else2:
+EndIf2:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD -4(LB), R2
+	CMP #1, R2
+	BNE Else3
+	LOAD -3(LB), R2
+	LOAD R2, R0
+	BRA fin.Math._pow
+	BRA EndIf3
+Else3:
+EndIf3:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD -4(LB), R2
+	LOAD -4(LB), R3
+	QUO #2, R3
+	BOV divisionByZero
+	LOAD -4(LB), R4
+	QUO #2, R4
+	BOV divisionByZero
+	ADD R4, R3
+	CMP R3, R2
+	BNE Else4
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 2 ; with 2 params.
+	ADDSP #3
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, -1(SP)
+	LOAD -4(LB), R2
+	QUO #2, R2
+	BOV divisionByZero
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+	LOAD R0, R2
+	LOAD R2, R0
+	BRA fin.Math._pow
+	BRA EndIf4
+Else4:
+EndIf4:
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 2 ; with 2 params.
+	ADDSP #3
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, -1(SP)
+	LOAD -4(LB), R2
+	SUB #1, R2
+	QUO #2, R2
+	BOV divisionByZero
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+	LOAD R0, R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD R2, R0
+	BRA fin.Math._pow
+	WSTR "ERROR : exited method Math._pow with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math._pow:
+; restore registers
+	POP R2
+	POP R3
+	POP R4
+	RTS
+code.Math._fact:
+	TSTO #4	; Max nb of stored register : 4 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R3
+	PUSH R2
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD -3(LB), R2
+	CMP #0, R2
+	BGT Else5
+	LOAD #1, R2
+	LOAD R2, R0
+	BRA fin.Math._fact
+	BRA EndIf5
+Else5:
+EndIf5:
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 3 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2
+	SUB #1, R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	SUBSP #2
+	LOAD R0, R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	LOAD R2, R0
+	BRA fin.Math._fact
+	WSTR "ERROR : exited method Math._fact with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math._fact:
+; restore registers
+	POP R2
+	POP R3
+	RTS
+code.Math._modulo2pi:
+	TSTO #4	; Max nb of stored register : 2 , ADDSP : 2
+	BOV stackOverflow
+; save registers
+	PUSH R3
+	PUSH R2
+	ADDSP #2
+	LOAD -3(LB), R2
+	ADD #0x0.0p0, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	CMP #0x0.0p0, R2
+	BLE Else6
+; Beginning of a new while loop
+	BRA WhileCondition0
+WhileBeginning0:
+	LOAD -2(LB), R2
+	LOAD 1(R2), R2
+	MUL #0x1.0p1, R2
+	BOV arithOverflow
+	STORE R2, 1(LB)
+; Beginning of a new while loop
+	BRA WhileCondition1
+WhileBeginning1:
+	LOAD 1(LB), R2
+	MUL #0x1.0p1, R2
+	BOV arithOverflow
+	STORE R2, 1(LB)
+WhileCondition1:
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	LOAD 1(LB), R3
+	MUL #0x1.0p1, R3
+	BOV arithOverflow
+	CMP R3, R2
+	BGT WhileBeginning1
+; End of a while loop
+	LOAD 2(LB), R2
+	LOAD 1(LB), R3
+	SUB R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+WhileCondition0:
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	LOAD -2(LB), R3
+	LOAD 1(R3), R3
+	CMP R3, R2
+	BGE WhileBeginning0
+; End of a while loop
+	BRA EndIf6
+Else6:
+EndIf6:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	CMP #0x0.0p0, R2
+	BGE Else7
+; Beginning of a new while loop
+	BRA WhileCondition2
+WhileBeginning2:
+	LOAD -2(LB), R2
+	LOAD 1(R2), R2
+	OPP R2, R2
+	MUL #0x1.0p1, R2
+	BOV arithOverflow
+	STORE R2, 1(LB)
+; Beginning of a new while loop
+	BRA WhileCondition3
+WhileBeginning3:
+	LOAD 1(LB), R2
+	MUL #0x1.0p1, R2
+	BOV arithOverflow
+	STORE R2, 1(LB)
+WhileCondition3:
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	LOAD 1(LB), R3
+	MUL #0x1.0p1, R3
+	BOV arithOverflow
+	CMP R3, R2
+	BLT WhileBeginning3
+; End of a while loop
+	LOAD 2(LB), R2
+	LOAD 1(LB), R3
+	SUB R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+WhileCondition2:
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	LOAD -2(LB), R3
+	LOAD 1(R3), R3
+	OPP R3, R3
+	CMP R3, R2
+	BLT WhileBeginning2
+; End of a while loop
+	BRA EndIf7
+Else7:
+EndIf7:
+	LOAD 2(LB), R2
+	LOAD R2, R0
+	BRA fin.Math._modulo2pi
+	WSTR "ERROR : exited method Math._modulo2pi with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math._modulo2pi:
+	SUBSP #2
+; restore registers
+	POP R2
+	POP R3
+	RTS
+code.Math.ulp:
+	TSTO #4	; Max nb of stored register : 2 , ADDSP : 2
+	BOV stackOverflow
+; save registers
+	PUSH R3
+	PUSH R2
+	ADDSP #2
+	LOAD -3(LB), R2
+	STORE R2, 1(LB)
+	LOAD #0x1.0p0, R2
+	DIV #0x1.0p2, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD 2(LB), R2
+	LOAD 2(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD 2(LB), R2
+	LOAD 2(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD 2(LB), R2
+	LOAD 2(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD 2(LB), R2
+	LOAD 2(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD 2(LB), R2
+	LOAD 2(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD #2, R3
+	FLOAT R3, R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD 2(LB), R2
+	LOAD 2(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD #2, R3
+	FLOAT R3, R3
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD -3(LB), R2
+	LOAD 2(LB), R3
+	ADD R3, R2
+	BOV arithOverflow
+	STORE R2, 1(LB)
+; Beginning of a new while loop
+	BRA WhileCondition4
+WhileBeginning4:
+	LOAD 2(LB), R2
+	LOAD #2, R3
+	FLOAT R3, R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD -3(LB), R2
+	LOAD 2(LB), R3
+	ADD R3, R2
+	BOV arithOverflow
+	STORE R2, 1(LB)
+WhileCondition4:
+; Beginning of a comparison in a control flow
+	LOAD 1(LB), R2
+	LOAD -3(LB), R3
+	CMP R3, R2
+	BEQ WhileBeginning4
+; End of a while loop
+	LOAD 2(LB), R2
+	LOAD R2, R0
+	BRA fin.Math.ulp
+	WSTR "ERROR : exited method Math.ulp with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math.ulp:
+	SUBSP #2
+; restore registers
+	POP R2
+	POP R3
+	RTS
+code.Math.sin:
+	TSTO #9	; Max nb of stored register : 4 , ADDSP : 5
+	BOV stackOverflow
+; save registers
+	PUSH R4
+	PUSH R3
+	PUSH R2
+	ADDSP #5
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 4 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	SUBSP #2
+	LOAD R0, R2
+	STORE R2, 1(LB)
+	LOAD #13, R2
+	STORE R2, 2(LB)
+	LOAD #1, R2
+	FLOAT R2, R2
+	LOAD -2(LB), R3
+; Beginning of a method call : method at index 3 ; with 1 params.
+	ADDSP #2
+	STORE R3, 0(SP)
+	LOAD 2(LB), R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #2
+	LOAD R0, R3
+	FLOAT R3, R3
+; Expression of type int casted to type float
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, 3(LB)
+	LOAD 1(LB), R2
+	LOAD 1(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 4(LB)
+	LOAD #1, R2
+	STORE R2, 5(LB)
+; Beginning of a new while loop
+	BRA WhileCondition5
+WhileBeginning5:
+	LOAD 5(LB), R2
+	OPP R2, R2
+	STORE R2, 5(LB)
+	LOAD 2(LB), R2
+	SUB #2, R2
+	STORE R2, 2(LB)
+	LOAD 3(LB), R2
+	LOAD 4(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD 5(LB), R3
+	FLOAT R3, R3
+	LOAD -2(LB), R4
+; Beginning of a method call : method at index 3 ; with 1 params.
+	ADDSP #2
+	STORE R4, 0(SP)
+	LOAD 2(LB), R4
+	STORE R4, -1(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ nullDereferencement
+	LOAD 0(R4), R4
+	BSR 4(R4)
+	SUBSP #2
+	LOAD R0, R4
+	FLOAT R4, R4
+; Expression of type int casted to type float
+	DIV R4, R3
+	BOV arithOverflow
+	ADD R3, R2
+	BOV arithOverflow
+	STORE R2, 3(LB)
+WhileCondition5:
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	CMP #2, R2
+	BGE WhileBeginning5
+; End of a while loop
+	LOAD 3(LB), R2
+	LOAD 1(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD R2, R0
+	BRA fin.Math.sin
+	WSTR "ERROR : exited method Math.sin with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math.sin:
+	SUBSP #5
+; restore registers
+	POP R2
+	POP R3
+	POP R4
+	RTS
+code.Math.cos:
+	TSTO #9	; Max nb of stored register : 4 , ADDSP : 5
+	BOV stackOverflow
+; save registers
+	PUSH R4
+	PUSH R3
+	PUSH R2
+	ADDSP #5
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 4 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	SUBSP #2
+	LOAD R0, R2
+	STORE R2, 1(LB)
+	LOAD #20, R2
+	STORE R2, 2(LB)
+	LOAD #1, R2
+	FLOAT R2, R2
+	LOAD -2(LB), R3
+; Beginning of a method call : method at index 3 ; with 1 params.
+	ADDSP #2
+	STORE R3, 0(SP)
+	LOAD 2(LB), R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #2
+	LOAD R0, R3
+	FLOAT R3, R3
+; Expression of type int casted to type float
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, 3(LB)
+	LOAD 1(LB), R2
+	LOAD 1(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 4(LB)
+	LOAD #1, R2
+	STORE R2, 5(LB)
+; Beginning of a new while loop
+	BRA WhileCondition6
+WhileBeginning6:
+	LOAD 5(LB), R2
+	OPP R2, R2
+	STORE R2, 5(LB)
+	LOAD 2(LB), R2
+	SUB #2, R2
+	STORE R2, 2(LB)
+	LOAD 3(LB), R2
+	LOAD 4(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD 5(LB), R3
+	FLOAT R3, R3
+	LOAD -2(LB), R4
+; Beginning of a method call : method at index 3 ; with 1 params.
+	ADDSP #2
+	STORE R4, 0(SP)
+	LOAD 2(LB), R4
+	STORE R4, -1(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ nullDereferencement
+	LOAD 0(R4), R4
+	BSR 4(R4)
+	SUBSP #2
+	LOAD R0, R4
+	FLOAT R4, R4
+; Expression of type int casted to type float
+	DIV R4, R3
+	BOV arithOverflow
+	ADD R3, R2
+	BOV arithOverflow
+	STORE R2, 3(LB)
+WhileCondition6:
+; Beginning of a comparison in a control flow
+	LOAD 2(LB), R2
+	CMP #0, R2
+	BGT WhileBeginning6
+; End of a while loop
+	LOAD 3(LB), R2
+	LOAD R2, R0
+	BRA fin.Math.cos
+	WSTR "ERROR : exited method Math.cos with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math.cos:
+	SUBSP #5
+; restore registers
+	POP R2
+	POP R3
+	POP R4
+	RTS
+code.Math.asin:
+	TSTO #8	; Max nb of stored register : 3 , ADDSP : 5
+	BOV stackOverflow
+; save registers
+	PUSH R4
+	PUSH R3
+	PUSH R2
+	ADDSP #5
+	LOAD #3, R2
+	STORE R2, 1(LB)
+	LOAD #0x1.0p-1, R2
+	STORE R2, 2(LB)
+	LOAD -3(LB), R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 3(LB)
+	LOAD 3(LB), R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 4(LB)
+	LOAD -3(LB), R2
+	LOAD 2(LB), R3
+	LOAD 4(LB), R4
+	MUL R4, R3
+	BOV arithOverflow
+	LOAD #3, R4
+	FLOAT R4, R4
+	DIV R4, R3
+	BOV arithOverflow
+	ADD R3, R2
+	BOV arithOverflow
+	STORE R2, 5(LB)
+; Beginning of a new If statement
+; Beginning of a 'and' Control Flow : b = true E = Else8
+; Beginning of the left op control flow
+; Beginning of a comparison in a control flow
+	LOAD -3(LB), R2
+	CMP #0x1.0p0, R2
+	BGT EndOfBoolExpr0
+; Beginning of the right op control flow
+; Beginning of a comparison in a control flow
+	LOAD -3(LB), R2
+	LOAD #0x1.0p0, R3
+	OPP R3, R3
+	CMP R3, R2
+	BGE Else8
+EndOfBoolExpr0:
+; End of a 'and' Control Flow : b = true E = Else8
+	WSTR "error, must be between -1 and 1"
+	WNL
+	LOAD #0x0.0p0, R2
+	LOAD R2, R0
+	BRA fin.Math.asin
+	BRA EndIf8
+Else8:
+EndIf8:
+; Beginning of a new while loop
+	BRA WhileCondition7
+WhileBeginning7:
+	LOAD 4(LB), R2
+	LOAD 3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 4(LB)
+	LOAD 2(LB), R2
+	LOAD 1(LB), R3
+	FLOAT R3, R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD 1(LB), R3
+	ADD #1, R3
+	FLOAT R3, R3
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD 1(LB), R2
+	ADD #2, R2
+	STORE R2, 1(LB)
+	LOAD 5(LB), R2
+	LOAD 2(LB), R3
+	LOAD 4(LB), R4
+	MUL R4, R3
+	BOV arithOverflow
+	LOAD 1(LB), R4
+	FLOAT R4, R4
+	DIV R4, R3
+	BOV arithOverflow
+	ADD R3, R2
+	BOV arithOverflow
+	STORE R2, 5(LB)
+WhileCondition7:
+; Beginning of a comparison in a control flow
+	LOAD 1(LB), R2
+	CMP #999, R2
+	BLT WhileBeginning7
+; End of a while loop
+	LOAD 5(LB), R2
+	LOAD R2, R0
+	BRA fin.Math.asin
+	WSTR "ERROR : exited method Math.asin with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math.asin:
+	SUBSP #5
+; restore registers
+	POP R2
+	POP R3
+	POP R4
+	RTS
+code.Math.atan:
+	TSTO #4	; Max nb of stored register : 4 , ADDSP : 0
+	BOV stackOverflow
+; save registers
+	PUSH R4
+	PUSH R3
+	PUSH R2
+; Beginning of a new If statement
+; Beginning of a 'and' Control Flow : b = true E = Else9
+; Beginning of the left op control flow
+; Beginning of a comparison in a control flow
+	LOAD -3(LB), R2
+	CMP #0x1.0p0, R2
+	BGT EndOfBoolExpr1
+; Beginning of the right op control flow
+; Beginning of a comparison in a control flow
+	LOAD -3(LB), R2
+	LOAD #0x1.0p0, R3
+	OPP R3, R3
+	CMP R3, R2
+	BGE Else9
+EndOfBoolExpr1:
+; End of a 'and' Control Flow : b = true E = Else9
+	LOAD -2(LB), R2
+	LOAD 1(R2), R2
+	LOAD #2, R3
+	FLOAT R3, R3
+	DIV R3, R2
+	BOV arithOverflow
+	LOAD -2(LB), R3
+; Beginning of a method call : method at index 10 ; with 1 params.
+	ADDSP #2
+	STORE R3, 0(SP)
+	LOAD #1, R3
+	FLOAT R3, R3
+	LOAD -3(LB), R4
+	DIV R4, R3
+	BOV arithOverflow
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ nullDereferencement
+	LOAD 0(R3), R3
+	BSR 11(R3)
+	SUBSP #2
+	LOAD R0, R3
+	SUB R3, R2
+	BOV arithOverflow
+	LOAD R2, R0
+	BRA fin.Math.atan
+	BRA EndIf9
+Else9:
+EndIf9:
+	LOAD -2(LB), R2
+; Beginning of a method call : method at index 10 ; with 1 params.
+	ADDSP #2
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ nullDereferencement
+	LOAD 0(R2), R2
+	BSR 11(R2)
+	SUBSP #2
+	LOAD R0, R2
+	LOAD R2, R0
+	BRA fin.Math.atan
+	WSTR "ERROR : exited method Math.atan with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math.atan:
+; restore registers
+	POP R2
+	POP R3
+	POP R4
+	RTS
+code.Math._atan:
+	TSTO #7	; Max nb of stored register : 3 , ADDSP : 4
+	BOV stackOverflow
+; save registers
+	PUSH R4
+	PUSH R3
+	PUSH R2
+	ADDSP #4
+	LOAD #999, R2
+	STORE R2, 1(LB)
+	LOAD #1, R2
+	OPP R2, R2
+	FLOAT R2, R2
+	LOAD 1(LB), R3
+	FLOAT R3, R3
+; Expression of type int casted to type float
+	DIV R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+	LOAD -3(LB), R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	STORE R2, 3(LB)
+	LOAD #1, R2
+	OPP R2, R2
+	STORE R2, 4(LB)
+; Beginning of a new while loop
+	BRA WhileCondition8
+WhileBeginning8:
+	LOAD 1(LB), R2
+	SUB #2, R2
+	STORE R2, 1(LB)
+	LOAD 4(LB), R2
+	OPP R2, R2
+	STORE R2, 4(LB)
+	LOAD 2(LB), R2
+	LOAD 3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD 4(LB), R3
+	FLOAT R3, R3
+	LOAD 1(LB), R4
+	FLOAT R4, R4
+; Expression of type int casted to type float
+	DIV R4, R3
+	BOV arithOverflow
+	ADD R3, R2
+	BOV arithOverflow
+	STORE R2, 2(LB)
+WhileCondition8:
+; Beginning of a comparison in a control flow
+	LOAD 1(LB), R2
+	CMP #2, R2
+	BGT WhileBeginning8
+; End of a while loop
+	LOAD 2(LB), R2
+	LOAD -3(LB), R3
+	MUL R3, R2
+	BOV arithOverflow
+	LOAD R2, R0
+	BRA fin.Math._atan
+	WSTR "ERROR : exited method Math._atan with non-void return type without a return instruction."
+	WNL
+	ERROR
+fin.Math._atan:
+	SUBSP #4
+; restore registers
+	POP R2
+	POP R3
+	POP R4
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+stackOverflow:
+	WSTR "ERROR : stack overflow"
+	WNL
+	ERROR
+divisionByZero:
+	WSTR "ERROR : Can't divide by 0 !"
+	WNL
+	ERROR
+arithOverflow:
+	WSTR "ERROR : You have used an arithmetic operation on Floats that triggered an overflow."
+	WNL
+	ERROR
+nullDereferencement:
+	WSTR "ERROR : null dereferencement"
+	WNL
+	ERROR
+; end main program

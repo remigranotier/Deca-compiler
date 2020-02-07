@@ -1,0 +1,12 @@
+// Description :
+//test of inequality operation between operands that are not float or int
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : <Comparison operands must be int or float and are boolean and boolean>
+{
+    int a;
+    if(true>false){
+        a = 0;
+    }
+}

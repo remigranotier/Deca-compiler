@@ -1,0 +1,37 @@
+// Description:
+//    test boolean operation equals and notEquals
+//
+// Results:
+//
+//
+// Historique:
+//    cree le 21/01/2020
+
+{
+   if (4 != 4) {
+        println("fail1");
+   }
+
+   if (3 != 4) {
+        println("ok1");
+   }
+
+   if (4 == 5) {
+        println("fail2");
+   }
+
+   if (4 == 4) {
+        println("ok2");
+   }
+
+   if (!(4 != 4)) {
+        println("ok3");
+   }
+
+   if (!(4 == 4)) {
+        println("fail3");
+   }
+
+   println("FIN");
+
+}

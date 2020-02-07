@@ -1,0 +1,11 @@
+// Description :
+//      Test various prints
+//
+// Results :
+//      missing ')' at ';'
+//
+// History :
+//      created on 9/01/2020
+{
+    println("ok";
+}

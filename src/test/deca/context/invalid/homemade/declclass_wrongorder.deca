@@ -1,0 +1,5 @@
+// trying to declare class in wrong order
+
+class A extends B {}
+
+class B {}

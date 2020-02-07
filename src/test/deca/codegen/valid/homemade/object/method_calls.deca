@@ -1,0 +1,42 @@
+// Description:
+ //    Classes (but they are useless)
+ //
+ // Results:
+ //     3
+ //
+ // History:
+ //    created 22/01/2020
+
+class A {
+    void a() {
+        println("ok1");
+    }
+
+    void b() {
+        println("not ok");
+    }
+}
+
+class B extends A {
+    void b() {
+        println("ok2");
+    }
+
+    void c() {
+        println("ok3");
+    }
+}
+
+
+{
+    A a = new A();
+    B b = new B();
+
+    a.a();
+    b.a();
+    b.b();
+    b.c();
+
+    1 + 1;
+}
+

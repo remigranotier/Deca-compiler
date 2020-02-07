@@ -1,0 +1,19 @@
+; start main program
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+	RINT
+	LOAD R1, R2
+	STORE R2, 1(GB)
+	LOAD #0x1.0p-1, R3
+	LOAD 1(GB), R4
+	LOAD 1(GB), R5
+	MUL R5, R4
+	FLOAT R4, R4
+	MUL R4, R3
+	LOAD R3, R1
+; On ecrit ce qui se trouve dans R1 (le resultat)
+	WFLOAT
+	WNL
+	HALT
+; end main program

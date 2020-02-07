@@ -1,0 +1,12 @@
+// Description:
+//    check UnaryMinus on a float
+//
+// Results:
+//
+//
+// History:
+//    created 14/01/2020
+
+{
+   println(-6.789);
+}

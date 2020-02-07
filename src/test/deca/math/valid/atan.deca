@@ -1,0 +1,9 @@
+#include "Math.decah"
+
+{
+Math m = new Math();
+println("atan(0.0) = ", m.atan(0.0));
+println("atan(pi/4) = ", m.atan(m._pi/4));
+println("atan(1/2) = ", m.atan(m._pi/2));
+println("atan(1) = ", m.atan(1.0));
+}

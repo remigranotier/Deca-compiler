@@ -1,0 +1,12 @@
+// Description:
+//    test error when division by zero
+//
+// Results:
+//
+//
+// Historique:
+//    cree le 13/01/2020
+
+{
+   print(1/0);
+}

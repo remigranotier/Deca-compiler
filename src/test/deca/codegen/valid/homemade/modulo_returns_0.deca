@@ -1,0 +1,12 @@
+// Description:
+//    print a modulo
+//
+// Results:
+//      ok
+//
+// History:
+//    created 14/01/2020
+
+{
+   println(8%4); // expect 0
+}

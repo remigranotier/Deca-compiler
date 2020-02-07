@@ -1,0 +1,12 @@
+// Description :
+//      Empty program
+//
+// Results :
+//      this is definitely fine !
+// History :
+//      created on 9/01/2020
+
+#include "included1.decah"
+#include "included2.decah"
+"fine !");
+}

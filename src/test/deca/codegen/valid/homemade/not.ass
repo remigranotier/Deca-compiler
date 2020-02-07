@@ -1,0 +1,122 @@
+; ADDSP : method table size : 2, nb of var 0
+	ADDSP #2
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+; Beginning of main instructions:
+; Beginning of a new If statement
+; Beginning of a Boolean Literal control flow : value : true ; b = true
+	BRA Else0
+; End of a Boolean Literal control flow
+	WSTR "fail1"
+	WNL
+	BRA EndIf0
+Else0:
+EndIf0:
+; Beginning of a new If statement
+; Beginning of a Boolean Literal control flow : value : false ; b = true
+; Beginning of a Boolean Literal control flow : value : true ; b = false
+; End of a Boolean Literal control flow
+; End of a Boolean Literal control flow
+	WSTR "ok1"
+	WNL
+	BRA EndIf1
+Else1:
+EndIf1:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #5, R2
+	CMP #4, R2
+	BGE Else2
+	WSTR "fail2"
+	WNL
+	BRA EndIf2
+Else2:
+EndIf2:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #5, R2
+	CMP #4, R2
+	BGT Else3
+	WSTR "fail3"
+	WNL
+	BRA EndIf3
+Else3:
+EndIf3:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #5, R2
+	CMP #4, R2
+	BLE Else4
+	WSTR "ok2"
+	WNL
+	BRA EndIf4
+Else4:
+EndIf4:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #5, R2
+	CMP #4, R2
+	BLT Else5
+	WSTR "ok3"
+	WNL
+	BRA EndIf5
+Else5:
+EndIf5:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #0x1.53f7cep2, R2
+	CMP #0x1.36147ap2, R2
+	BGE Else6
+	WSTR "fail4"
+	WNL
+	BRA EndIf6
+Else6:
+EndIf6:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #0x1.53d70ap2, R2
+	CMP #0x1.0eb852p2, R2
+	BGT Else7
+	WSTR "fail5"
+	WNL
+	BRA EndIf7
+Else7:
+EndIf7:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #0x1.420c4ap2, R2
+	CMP #0x1.066666p2, R2
+	BLE Else8
+	WSTR "ok4"
+	WNL
+	BRA EndIf8
+Else8:
+EndIf8:
+; Beginning of a new If statement
+; Beginning of a comparison in a control flow
+	LOAD #0x1.533334p2, R2
+	CMP #0x1.23d70ap2, R2
+	BLT Else9
+	WSTR "ok5"
+	WNL
+	BRA EndIf9
+Else9:
+EndIf9:
+	WSTR "FIN"
+	WNL
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+; end main program

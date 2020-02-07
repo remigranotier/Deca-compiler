@@ -1,0 +1,53 @@
+// Description:
+//    test boolean operation not
+//
+// Results:
+//      ok
+//
+// Historique:
+//    cree le 21/01/2020
+
+{
+   if (!true) {
+        println("fail1");
+   }
+
+   if (!false) {
+        println("ok1");
+   }
+
+   if (!(4<=5)) {
+        println("fail2");
+   }
+
+   if (!(4<5)) {
+        println("fail3");
+   }
+
+   if (!(4>=5)) {
+        println("ok2");
+   }
+
+   if (!(4>5)) {
+        println("ok3");
+   }
+
+   if (!(4.845<=5.312)) {
+        println("fail4");
+   }
+
+   if (!(4.23<5.31)) {
+       println("fail5");
+   }
+
+   if (!(4.1>=5.0320)) {
+       println("ok4");
+   }
+
+   if (!(4.56>5.3)) {
+       println("ok5");
+   }
+
+   println("FIN");
+
+}

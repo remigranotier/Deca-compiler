@@ -1,0 +1,10 @@
+// Description :
+//test of variable initialization with a different type
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <9> : < Variable c is already declared in current context>
+{
+   boolean c = true;
+   int c;
+}

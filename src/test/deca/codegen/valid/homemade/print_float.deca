@@ -1,0 +1,14 @@
+// Description:
+//    print a Float
+//
+// Results:
+//  ok
+//
+// History:
+//    created 13/01/2020
+
+{
+   println(1.3491);
+   printlnx(1.3491 * 12.34f);
+   printx(11.5 + 4.5);
+}

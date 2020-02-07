@@ -1,0 +1,78 @@
+; ADDSP : method table size : 2, nb of var 4
+	ADDSP #6
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Global variables initialization
+	LOAD #1, R2
+	FLOAT R2, R2
+	STORE R2, 3(GB)
+	LOAD #3, R2
+	STORE R2, 4(GB)
+	LOAD #1, R2
+	STORE R2, 5(GB)
+	LOAD #1, R2
+	STORE R2, 6(GB)
+; Beginning of main instructions:
+	LOAD 3(GB), R2
+	LOAD 4(GB), R3
+	FLOAT R3, R3
+	ADD R3, R2
+	STORE R2, 3(GB)
+; Beginning of a new while loop
+	BRA WhileCondition0
+WhileBeginning0:
+	LOAD 3(GB), R2
+	LOAD 4(GB), R3
+	FLOAT R3, R3
+	ADD R3, R2
+	LOAD #1, R3
+	FLOAT R3, R3
+	SUB R3, R2
+	STORE R2, 3(GB)
+	LOAD 5(GB), R2
+	STORE R2, 6(GB)
+; Beginning of the computation of a boolean expression
+	LOAD 5(GB), R0
+	CMP #0, R0
+	BEQ ControlFlowBlock0
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr0
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock0:
+	LOAD #1, R2
+EndOfBoolExpr0:
+; End of the computation of a boolean expression
+	STORE R2, 5(GB)
+WhileCondition0:
+; Beginning of a 'and' Control Flow : b = false E = WhileBeginning0
+; Beginning of the left op control flow
+; Beginning of a comparison in a control flow
+	LOAD 3(GB), R2
+	LOAD 4(GB), R3
+	FLOAT R3, R3
+	CMP R3, R2
+	BLT WhileBeginning0
+; Beginning of the right op control flow
+; Beginning of a comparison in a control flow
+	LOAD 5(GB), R2
+	LOAD 6(GB), R3
+	CMP R3, R2
+	BEQ WhileBeginning0
+; End of a 'and' Control Flow : b = false E = WhileBeginning0
+; End of a while loop
+	HALT
+init.object:
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+; end main program

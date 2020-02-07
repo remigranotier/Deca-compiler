@@ -1,0 +1,54 @@
+// Description:
+ //    Classes (but they are useless)
+ //
+ // Results:
+ //     3
+ //
+ // History:
+ //    created 22/01/2020
+
+class A {
+    void a() {
+        println("ok");
+    }
+
+    void b() {
+        println("not ok");
+    }
+
+    void d(int x, int y, float z) {
+        println(x, " ; ", y, " ; ", z);
+    }
+}
+
+class B extends A {
+    void b() {
+        println("ok");
+    }
+
+    void c() {
+        println("ok");
+    }
+
+    void d(int x, int y, float z) {
+        println(z," ; ",  y," ; ",  x);
+    }
+}
+
+
+{
+    A a = new A();
+    B b = new B();
+
+    a.a();
+    a.b();
+    b.a();
+    b.b();
+    b.c();
+
+    a.d(1, 2, 3.0);
+    b.d(1, 2, 3.0);
+
+    1 + 1;
+}
+

@@ -1,0 +1,12 @@
+ // Description:
+ //    do a combination of simple operation (and print the result)
+ //
+ // Results:
+ //
+ //
+ // History:
+ //    created 14/01/2020
+
+ {
+    println(2*3 + 4*5); // expect 26
+ }

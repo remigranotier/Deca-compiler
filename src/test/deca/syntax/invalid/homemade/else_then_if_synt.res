@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/homemade/else_then_if.deca:10:4: mismatched input 'else' expecting {'}', '(', ';', '-', '!', 'print', 'println', 'true', 'false', 'new', 'printlnx', 'while', 'null', 'printx', 'readInt', 'readFloat', 'return', 'if', 'this', IDENT, INT, FLOAT, STRING}

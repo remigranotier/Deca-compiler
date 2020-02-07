@@ -1,0 +1,13 @@
+// Description :
+//test de la attribuition d'un float à un int
+//
+// Resultats :
+//Erreur contextuelle
+//Ligne <12> : <Type int cannot be assigned to type float>
+{
+   int a=1;
+   float b = 0.3;
+
+   // Doit etre refuse.
+   a = a+ b;
+}

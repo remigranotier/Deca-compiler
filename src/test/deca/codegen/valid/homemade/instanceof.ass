@@ -1,0 +1,333 @@
+; ADDSP : method table size : 11, nb of var 6
+	ADDSP #17
+; start main program
+; Generation of the method table of Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 2(GB)
+; Generation of the method table of : A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD Code.A.a, R0
+	STORE R0, 5(GB)
+; Generation of the method table of : B
+	LEA 3(GB), R0
+	STORE R0, 6(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD Code.A.a, R0
+	STORE R0, 8(GB)
+	LOAD Code.B.b, R0
+	STORE R0, 9(GB)
+; Generation of the method table of : C
+	LEA 1(GB), R0
+	STORE R0, 10(GB)
+	LOAD Code.Object.equals, R0
+	STORE R0, 11(GB)
+; Main program
+; Global variables initialization
+	NEW #1, R2
+	BOV heapFull
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 12(GB)
+	NEW #1, R2
+	BOV heapFull
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 13(GB)
+	NEW #1, R2
+	BOV heapFull
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 14(GB)
+	NEW #1, R2
+	BOV heapFull
+	LEA 10(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.C
+	POP R2
+	STORE R2, 15(GB)
+; Beginning of the computation of a boolean expression
+; Start of an instanceof
+	LOAD 14(GB), R2
+	LEA 6(GB), R0
+ControlFlowBlock1:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ ControlFlowBlock0
+	CMP #null, R2
+	BNE ControlFlowBlock1
+; End of an instanceof
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr0
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock0:
+	LOAD #1, R2
+EndOfBoolExpr0:
+; End of the computation of a boolean expression
+	STORE R2, 16(GB)
+; Beginning of the computation of a boolean expression
+; Start of an instanceof
+	LOAD 12(GB), R2
+	LEA 3(GB), R0
+ControlFlowBlock3:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr2
+	CMP #null, R2
+	BEQ ControlFlowBlock2
+	BRA ControlFlowBlock3
+EndOfBoolExpr2:
+; End of an instanceof
+; Code to be executed if the control flow do NOT jump on the 2nd block
+	LOAD #0, R2
+	BRA EndOfBoolExpr1
+; Code to be executed if the control flow DO jump on the 2nd block
+ControlFlowBlock2:
+	LOAD #1, R2
+EndOfBoolExpr1:
+; End of the computation of a boolean expression
+	STORE R2, 17(GB)
+; Beginning of main instructions:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 14(GB), R2
+	LEA 6(GB), R0
+ControlFlowBlock4:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr3
+	CMP #null, R2
+	BEQ Else0
+	BRA ControlFlowBlock4
+EndOfBoolExpr3:
+; End of an instanceof
+	WSTR "ok"
+	WNL
+	BRA EndIf0
+Else0:
+	WSTR "not ok"
+	WNL
+EndIf0:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 14(GB), R2
+	LEA 3(GB), R0
+ControlFlowBlock5:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr4
+	CMP #null, R2
+	BEQ Else1
+	BRA ControlFlowBlock5
+EndOfBoolExpr4:
+; End of an instanceof
+	WSTR "ok"
+	WNL
+	BRA EndIf1
+Else1:
+	WSTR "not ok"
+	WNL
+EndIf1:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 14(GB), R2
+	LEA 1(GB), R0
+ControlFlowBlock6:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr5
+	CMP #null, R2
+	BEQ Else2
+	BRA ControlFlowBlock6
+EndOfBoolExpr5:
+; End of an instanceof
+	WSTR "ok"
+	WNL
+	BRA EndIf2
+Else2:
+	WSTR "not ok"
+	WNL
+EndIf2:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 13(GB), R2
+	LEA 3(GB), R0
+ControlFlowBlock7:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr6
+	CMP #null, R2
+	BEQ Else3
+	BRA ControlFlowBlock7
+EndOfBoolExpr6:
+; End of an instanceof
+	WSTR "ok"
+	WNL
+	BRA EndIf3
+Else3:
+	WSTR "not ok"
+	WNL
+EndIf3:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 12(GB), R2
+	LEA 6(GB), R0
+ControlFlowBlock8:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr7
+	CMP #null, R2
+	BEQ Else4
+	BRA ControlFlowBlock8
+EndOfBoolExpr7:
+; End of an instanceof
+	WSTR "not ok"
+	WNL
+	BRA EndIf4
+Else4:
+	WSTR "ok"
+	WNL
+EndIf4:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 14(GB), R2
+	LEA 6(GB), R0
+ControlFlowBlock9:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ Else5
+	CMP #null, R2
+	BNE ControlFlowBlock9
+; End of an instanceof
+	WSTR "not ok"
+	WNL
+	BRA EndIf5
+Else5:
+	WSTR "ok"
+	WNL
+EndIf5:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 14(GB), R2
+	LEA 1(GB), R0
+ControlFlowBlock10:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ Else6
+	CMP #null, R2
+	BNE ControlFlowBlock10
+; End of an instanceof
+	WSTR "wtf"
+	WNL
+	BRA EndIf6
+Else6:
+	WSTR "ok"
+	WNL
+EndIf6:
+; Beginning of a new If statement
+	LOAD 16(GB), R0
+	CMP #0, R0
+	BEQ Else7
+	WSTR "ok"
+	WNL
+	BRA EndIf7
+Else7:
+	WSTR "oopsie"
+	WNL
+EndIf7:
+; Beginning of a new If statement
+	LOAD 17(GB), R0
+	CMP #0, R0
+	BNE Else8
+	WSTR "ok"
+	WNL
+	BRA EndIf8
+Else8:
+	WSTR "oopsie"
+	WNL
+EndIf8:
+; Beginning of a new If statement
+; Start of an instanceof
+	LOAD 15(GB), R2
+	LEA 3(GB), R0
+ControlFlowBlock11:
+	LOAD 0(R2), R2
+	CMP R0, R2
+	BEQ EndOfBoolExpr8
+	CMP #null, R2
+	BEQ Else9
+	BRA ControlFlowBlock11
+EndOfBoolExpr8:
+; End of an instanceof
+	WSTR "nope"
+	WNL
+	BRA EndIf9
+Else9:
+EndIf9:
+	LOAD #1, R2
+	ADD #1, R2
+	HALT
+init.object:
+	RTS
+init.A:
+; save registers
+; initialization of own fields
+; restore registers
+	RTS
+init.B:
+; save registers
+	LOAD -2(LB), R1
+; Call for initialization of inherited fields
+	PUSH R1
+	BSR init.A
+	SUBSP #1	; We get the stack back to its initial state
+; finished dealing with inheritance
+; initialization of own fields
+; restore registers
+	RTS
+init.C:
+; save registers
+; initialization of own fields
+; restore registers
+	RTS
+Code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	SEQ R0
+	RTS
+code.A.a:
+; save registers
+	WSTR "ok"
+	WNL
+fin.A.a:
+; restore registers
+	RTS
+code.B.b:
+; save registers
+	WSTR "ok"
+	WNL
+fin.B.b:
+; restore registers
+	RTS
+heapFull:
+	WSTR "ERROR : allocation failed because of full heap"
+	WNL
+	ERROR
+; end main program

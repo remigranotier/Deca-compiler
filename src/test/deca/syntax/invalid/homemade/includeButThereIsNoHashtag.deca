@@ -1,0 +1,13 @@
+// Description :
+//      Empty program
+//
+// Results :
+//      no viable alternative at input 'include'
+// History :
+//      created on 9/01/2020
+
+include "included1.decah"
+
+{
+    println("this should not work");
+}

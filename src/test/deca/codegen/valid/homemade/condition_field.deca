@@ -1,0 +1,21 @@
+
+class A {
+    boolean x = false;
+    boolean y;
+ }
+
+{
+    A a = new A();
+    if (!a.x) {
+        print("coucou");
+    } else {
+        print("aled");
+    }
+
+    if (!a.y) {
+        print("yay");
+    } else {
+        println("ayay");
+    }
+
+}

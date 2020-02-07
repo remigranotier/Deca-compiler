@@ -1,0 +1,8 @@
+// trying to give the void type to a field
+
+class A {
+    int y;
+    float z;
+    boolean b;
+    protected void x;
+}

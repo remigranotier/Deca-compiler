@@ -1,0 +1,12 @@
+// Description:
+//    do an addition of intLitterals
+//
+// Results:
+//     ok
+//
+// History:
+//    created le 13/01/2020
+
+{
+   println(1);
+}

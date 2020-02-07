@@ -1,0 +1,10 @@
+#include "Math.decah"
+
+{
+Math m = new Math();
+println("cos(0) = ", m.cos(0.0));
+println("cos(pi/6) = ", m.cos(m._pi/6));
+println("cos(pi/4) = ", m.cos(m._pi/4));
+println("cos(pi/3) = ", m.cos(m._pi/3));
+println("cos(pi/2) = ", m.cos(m._pi/2));
+}

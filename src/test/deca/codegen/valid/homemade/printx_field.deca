@@ -1,0 +1,9 @@
+
+class A {
+    float jacky = 3.5;
+}
+
+{
+    A a = new A();
+    printlnx(a.jacky);
+}

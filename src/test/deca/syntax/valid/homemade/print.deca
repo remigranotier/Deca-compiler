@@ -1,0 +1,20 @@
+// Description :
+//      Test various prints
+//
+// Results :
+//      ok
+//      okf
+//      f
+//
+// History :
+//      created on 9/01/2020
+{
+    println("ok");
+    print("o");
+    print("k");
+    println("o", "k", " ");
+    println();
+    print();
+    printx(16);
+    printlnx(16);
+}

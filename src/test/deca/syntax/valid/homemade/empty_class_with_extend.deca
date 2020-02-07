@@ -1,0 +1,23 @@
+// Description :
+//      Various boolean operations
+//
+// Results :
+//      true
+//      true
+//      true
+//      false
+//      true
+//      false
+//      false
+//      true
+//      false
+//
+// History :
+//      created on 9/01/2020
+
+class ouaip extends ouaipp{
+}
+
+{
+    println("nice");
+}

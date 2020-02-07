@@ -1,0 +1,12 @@
+// Description:
+//    check UnaryMinus on an int
+//
+// Results:
+//
+//
+// History:
+//    created 21/01/2020
+
+{
+   println(-6);
+}
